@@ -1,0 +1,25 @@
+﻿
+<medium>{{ description }}</medium><span class="validation-error" invalid-property data-validation-property-replace-me></span>
+
+<br ng-if="description" />
+<small>{{ explanation }}</small>
+
+<div ng-show="inputType === 'radio'">
+	<div ng-repeat="enumeration in enumerations">
+		<div ng-if="enumeration.value !== 1000">
+			<div>
+				<input type="radio" data-group-name-replace-me ng-value="enumeration.value" ng-model="$parent.$parent.preferenceValue" />&nbsp;<span>{{ enumeration.text }}</span>
+			</div>
+		</div>
+		<div ng-if="enumeration.value === 1000">
+			<input type="radio" data-group-name-replace-me ng-value="enumeration.value" ng-model="$parent.$parent.preferenceValue" /><span style="margin-left:4px;">Other (specify below)</span>
+			<br />
+			<input class="form-control" ng-model="$parent.$parent.specifiedText" ng-disabled="!$parent.$parent.isUserSpecified"  />
+		</div>
+	</div>
+</div>
+
+
+<div ng-show="inputType === 'combo'">
+	<select class="form-control" ng-model="preferenceValue" ng-options="item.value as item.text for item in enumerations"></select>
+</div>

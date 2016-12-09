@@ -1,0 +1,108 @@
+﻿<style>
+	.td-right {
+		padding-left: 10px;
+	}
+
+	.error-status {
+		color: #ff0000;
+	}
+
+	label {
+		font-size: .8em;
+	}
+
+	p {
+		font-size: .8em;
+	}
+</style>
+
+<div class="widewrapper main">
+	<div class="container ob-container">
+
+		<div class="col-md-offset-1" ng-show="!isAccepted">
+			<div class="row form-group">
+				<div class="col-md-6 col-md-offset-1">
+					<select class="form-control" ng-model="profiler.key" ng-options="i for i in profiler.keys" ng-change="profiler.onKeyChanged()" ng-show="profiler.isVisible"></select>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-8 alert alert-warning">
+					<p>A deposit in the amount of <b><span>{{ response.depositDue | currency:"$" }}</span></b> is required to accept this service.</p>
+					<p>The remaining balance of <b><span>{{ response.balanceDue| currency:"$" }}</span></b> will be owed to the funeral home.</p>
+				</div>
+			</div>
+		</div>
+
+		<div ng-show="!isAccepted && response.canAccept">
+			<div class="col-md-offset-2">
+
+				<form id="payment-form">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Name of Cardholder</label><span class="validation-error pull-right" invalid-property property="payment.cardholderName"></span>
+								<input class="form-control input-md" ng-model="payment.cardholderName">
+							</div>
+
+							<div class="form-group">
+								<label>Credit Card Number</label><span class="validation-error pull-right" invalid-property property="payment.cardNumber"></span>
+								<input class="form-control input-md" ng-model="payment.cardNumber">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-3">
+							<label>Exp Month</label><span class="validation-error pull-right" invalid-property property="payment.expirationMonth"></span>
+							<select class="form-control" ng-model="payment.expirationMonth" ng-options="item.value as item.text for item in enum.expirationMonths"></select>
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Exp Year</label><span class="validation-error pull-right" invalid-property property="payment.expirationYear"></span>
+							<select class="col-md-2 form-control" ng-model="payment.expirationYear" ng-options="item.value as item.text for item in enum.expirationYears"></select>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-3">
+							<label>CVV (Security Code)</label><span class="validation-error pull-right" invalid-property property="payment.securityCode"></span>
+							<input class="form-control input-md" ng-model="payment.securityCode">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Zip Code</label><span class="validation-error pull-right" invalid-property property="payment.postalCode"></span>
+							<input class="form-control input-md" ng-model="payment.postalCode">
+						</div>
+					</div>
+
+					<div class="row">
+						<span class="validation-error" invalid-property property="id"></span>
+						<div class="form-group" ng-show="!busy.isBusy && !isAccepted && response.canAccept">
+							<div class="col-md-4">
+								<a class="btn btn-tales-one btn-block" ng-click="onSendPayment()" ng-enabled="!isValidating && !isAuthorizing">Send Payment</a>
+							</div>
+							<div class="col-md-2">
+								<a class="btn btn-default btn-block" ng-click="onCancel()" ng-enabled="!isValidating && !isAuthorizing">Cancel</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="col-md-offset-1" ng-show="isAccepted">
+			<div class="row form-group">
+				<div class="col-md-10 jumbotron">
+					<h2><span class="glyphicon glyphicon-ok">&nbsp;</span> Your payment of {{ response.depositPaid | currency:"$" }} has been accepted.</h2>
+					<h4>Please send any inquiries regarding this payment to: <span class="caption"><a href="mailto:support@funeral-choice.com">support@funeral-choice.com.</a></span></h4>
+				</div>
+
+				<div class="col-md-10">
+					<a class="btn btn-tales-one btn-block" ng-click="onClose()">See the contact information for the selected funeral provider</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,25 @@
+﻿
+
+<td >
+	<span>{{ description }}</span>
+</td>
+
+<td >
+	<div ng-show="noAgreement || isAgreed || isNotAgreed">
+		<span>{{ preferredChoice }}</span>
+	</div>
+
+	<div ng-show="isAlternate">
+		<span class="strike">{{ preferredChoice }}</span>
+		<span style="color: #4f9cef;">{{ alternateChoice }}</span>
+	</div>
+</td>
+
+<td >
+	<!-- display one of the following icons -->
+	<img class="span1" src="/Content/images/li-check.png" style="height:16px;width:16px;" ng-show="isAgreed" />
+
+	<img class="span1" src="/Content/images/li-cross.png" style="height:16px;width:16px;" ng-show="isNotAgreed" />
+	
+	<img class="span1" src="/Content/images/li-star2.png" style="height:16px;width:16px;" ng-show="isAlternate" />
+</td>

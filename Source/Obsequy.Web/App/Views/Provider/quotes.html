@@ -1,0 +1,101 @@
+﻿
+<style>
+	table {
+		font-size: .75em;
+	}
+</style>
+
+<div class="widewrapper main">
+
+	<div class="container ob-container">
+
+		<div ng-show="data.portfolio.accountStatus === enum.accountStatus.Pending.value" style="padding-top: 50px;">
+			<div class="jumbotron">
+				<h2><span class="glyphicon glyphicon-warning-sign"></span>Your account is currently under review and pending approval.</h2>
+				<h3>The account was submitted for approval <span time-elapsed="{{ data.portfolio.created.on }}"></span> ago and will be reviewed by our staff.</h3>
+				<h4>Please send any inquiries regarding your account status to: <span class="caption"><a href="mailto:support@funeral-choice.com">support@funeral-choice.com.</a></span></h4>
+			</div>
+		</div>
+		
+		<div ng-show="data.portfolio.accountStatus === enum.accountStatus.Active.value">
+
+			<br />
+			<div class="tabbable tabs-left">
+				<ul class="nav nav-tabs">
+					<li ng-class="{active: selectedTab == 'available'}">
+						<a ng-click="selectedTab = 'available'" href="">Available ({{ data.responsesAvailable.length }})</a>
+					</li>
+
+					<li ng-class="{active: selectedTab == 'pending'}">
+						<a ng-click="selectedTab = 'pending'" href="">Pending ({{ data.responsesPending.length }})</a>
+					</li>
+
+					<li ng-class="{active: selectedTab == 'accepted'}">
+						<a ng-click="selectedTab = 'accepted'" href="">Accepted ({{ data.responsesAccepted.length }})</a>
+					</li>
+
+					<li ng-class="{active: selectedTab == 'rejected'}">
+						<a ng-click="selectedTab = 'rejected'" href="">Rejected ({{ data.responsesRejected.length }})</a>
+					</li>
+
+					<li ng-class="{active: selectedTab == 'dismissed'}">
+						<a ng-click="selectedTab = 'dismissed'" href="">Dismissed ({{ data.responsesDismissed.length }})</a>
+					</li>
+				</ul>
+
+				<div class="tab-content" style="padding: 50px;">
+					<div ng-switch="selectedTab">
+
+						<div ng-switch-when="available">
+							<div ng-show="data.responsesAvailable.length !== 0">
+								<div ng-include="'/App/Templates/Provider/provider-available-responses.html'" />
+							</div>
+
+							<div class="alert alert-warning" ng-show="data.responsesAvailable.length === 0">
+								<span style="margin-left: 15px;">There are no available opportunities at this time.</span>
+							</div>
+						</div>
+
+						<div ng-switch-when="pending">
+							<div ng-show="data.responsesPending.length !== 0">
+								<div ng-include="'/App/Templates/Provider/provider-pending-responses.html'" />
+							</div>
+							<div class="alert alert-warning" ng-show="data.responsesPending.length === 0">
+								<span style="margin-left: 15px;">There are no pending opportunities at this time.</span>
+							</div>
+						</div>
+
+						<div ng-switch-when="accepted">
+							<div ng-show="data.responsesAccepted.length !== 0">
+								<div ng-include="'/App/Templates/Provider/provider-accepted-responses.html'" />
+							</div>
+							<div class="alert alert-warning" ng-show="data.responsesAccepted.length === 0">
+								<span style="margin-left: 15px;">There are no accepted opportunities at this time.</span>
+							</div>
+						</div>
+
+						<div ng-switch-when="rejected">
+							<div ng-show="data.responsesRejected.length !== 0">
+								<div ng-include="'/App/Templates/Provider/provider-rejected-responses.html'" />
+							</div>
+							<div class="alert alert-warning" ng-show="data.responsesRejected.length === 0">
+								<span style="margin-left: 15px;">There are no rejected opportunities at this time.</span>
+							</div>
+						</div>
+
+						<div ng-switch-when="dismissed">
+							<div ng-show="data.responsesDismissed.length !== 0">
+								<div ng-include="'/App/Templates/Provider/provider-dismissed-responses.html'" />
+							</div>
+							<div class="alert alert-warning" ng-show="data.responsesDismissed.length === 0">
+								<span style="margin-left: 15px;">There are no dismissed opportunities at this time.</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

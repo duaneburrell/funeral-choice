@@ -1,0 +1,37 @@
+﻿
+<div class="title">
+	<div class="col-md-9 col-md-offset-1">
+		<div class="alert alert-dismissed notification dismissed-color">
+			<h4>Your have <span><b>DISMISSED</b> this opportunity</span></h4>
+			<div class="clear"></div>
+
+			<ul style="font-size: 13px;">
+				<li class="arrow2"><span>Distance: </span><span>{{ response.distance }} miles from {{ response.preference.proximity.city }}</span></li>
+				<li class="arrow2"><span>Requested On: </span><span>{{ (response.request.current.on | date : date : format) || "Not specified" }}</span></li>
+				<li class="arrow2"><span>Dismissed On: </span><span>{{ (response.current.on | date : date : format) || "Not specified" }}</span></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="clearfix" />
+
+
+<div class="row">
+	<div class="col-md-9 col-md-offset-1">
+		<div ng-include="'/App/Templates/Shared/request-view-preferences.html'" />
+	</div>
+</div>
+
+<div class="row">
+	<div ng-show="!response.canBecomeAvailable">
+		<a class="btn btn-tales-one col-md-9 col-md-offset-1" href="#/quotes">Back to Quotes</a>
+    </div>
+	<div ng-show="response.canBecomeAvailable">
+		<a class="btn btn-tales-one col-md-6 col-md-offset-1" href="#/quotes">Back to Quotes</a>
+        <a class="btn btn-default btn-md col-md-3" ng-click="onSetAvailableResponse()">Undo Dismissal</a>
+    </div>
+</div>
+
+<div class="clearfix" />
+<br />
+

@@ -1,0 +1,234 @@
+﻿<style>
+	table {
+		font-size: .75em;
+	}
+
+	.action {
+		width: 160px;
+	}
+
+	.tab-content {
+		padding-top: 10px;
+	}
+</style>
+
+<div class="widewrapper main">
+	<div class="container ob-container">
+
+		<div class="tabbable tabs-left">
+
+			<div class="row">
+				<ul class="nav nav-tabs col-md-7">
+					<li ng-class="{active: selectedTab == 'pending'}">
+						<a ng-click="selectedTab = 'pending'" href="">Pending ({{ pendingProviders.length }})</a>
+					</li>
+
+					<li ng-class="{active: selectedTab == 'active'}">
+						<a ng-click="selectedTab = 'active'" href="">Active ({{ activeProviders.length }})</a>
+					</li>
+
+					<li ng-class="{active: selectedTab == 'suspended'}">
+						<a ng-click="selectedTab = 'suspended'" href="">Suspended ({{ suspendedProviders.length }})</a>
+					</li>
+
+					<li ng-class="{active: selectedTab == 'rejected'}">
+						<a ng-click="selectedTab = 'rejected'" href="">Rejected ({{ rejectedProviders.length }})</a>
+					</li>
+				</ul>
+
+				<div class="col-md-4 col-md-offset-1">
+				  <div class="input-group">
+					  <span class="input-group-btn">
+						<button class="btn btn-default" type="button" ng-click="searchText = ''"><i class="glyphicon glyphicon-trash" /></button>
+					  </span>
+					  <input type="text" class="form-control input-md" ng-model="searchText" />
+					</div>
+				</div>
+			</div>
+
+			<div class="tab-content row">
+				<div ng-switch="selectedTab">
+
+					<div ng-switch-when="pending">
+
+						<div ng-show="pendingProviders.length === 0" class="alert alert-warning fade in">
+							<span>There are no pending provider registrations at this time</span>
+						</div>
+
+						<table ng-show="pendingProviders.length > 0" class="table table-condensed table-bordered table-striped">
+							<thead>
+								<tr>
+									<th class="action">Action</th>
+									<th class="">Name</th>
+									<th class="">Phone</th>
+									<th class="">Email</th>
+									<th class="">Address</th>
+									<th class="">Website</th>
+								</tr>
+							</thead>
+
+							<tbody data-ng-repeat="provider in pendingProviders | filter: {$: searchText}">
+								<tr>
+									<td>
+										<a class="btn btn-sm btn-tales-one" ng-click="onActive(provider)">Activate</a>
+										<a class="btn btn-sm btn-default" ng-click="onReject(provider)">Reject</a>
+									</td>
+									<td>
+										<span>{{provider.principal.name}}</span>
+									</td>
+									<td>
+										<span>{{provider.principal.phone}}</span>
+									</td>
+									<td>
+										<span>{{provider.principal.email}}</span>
+									</td>
+									<td>
+										<span>{{provider.principal.address.line1}} {{provider.principal.address.city}}, {{provider.principal.address.state}} {{provider.principal.address.zip}}</span>
+									</td>
+									<td>
+										<a ng-href="{{provider.profile.website}}" target="_blank">{{provider.profile.website}}</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+
+
+					<div ng-switch-when="active">
+						<div ng-show="activeProviders.length === 0" class="alert alert-warning fade in">
+							<span>There are no active providers at this time</span>
+						</div>
+
+						<table ng-show="activeProviders.length > 0" class="table table-condensed table-bordered table-striped">
+							<thead>
+								<tr>
+									<th class="action">Action</th>
+									<th class="">Name</th>
+									<th class="">Phone</th>
+									<th class="">Email</th>
+									<th class="">Address</th>
+									<th class="">Website</th>
+								</tr>
+							</thead>
+
+							<tbody data-ng-repeat="provider in activeProviders | filter: {$: searchText}">
+								<tr>
+									<td>
+										<a class="btn btn-sm btn-default" ng-click="onSuspend(provider)">Suspend</a>
+										<a class="btn btn-sm btn-tales-two" ng-href="#/provider/{{ provider.id }}">Details</a>
+									</td>
+									<td>
+										<span>{{provider.principal.name}}</span>
+									</td>
+									<td>
+										<span>{{provider.principal.phone}}</span>
+									</td>
+									<td>
+										<span>{{provider.principal.email}}</span>
+									</td>
+									<td>
+										<span>{{provider.principal.address.line1}}, {{provider.principal.address.city}}, {{provider.principal.address.state}} {{provider.principal.address.zip}}</span>
+									</td>
+									<td>
+										<a ng-href="{{provider.profile.website}}" target="_blank">{{provider.profile.website}}</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+
+
+					<div ng-switch-when="suspended">
+						<div ng-show="suspendedProviders.length === 0" class="alert alert-warning fade in">
+							<span>There are no suspended providers at this time</span>
+						</div>
+
+						<table ng-show="suspendedProviders.length > 0" class="table table-condensed table-bordered table-striped">
+							<thead>
+								<tr>
+									<th class="action">Action</th>
+									<th class="">Name</th>
+									<th class="">Phone</th>
+									<th class="">Email</th>
+									<th class="">Address</th>
+									<th class="">Website</th>
+								</tr>
+							</thead>
+
+							<tbody data-ng-repeat="provider in suspendedProviders | filter: {$: searchText}">
+								<tr>
+									<td>
+										<a class="btn btn-sm btn-tales-one" ng-click="onActive(provider)">Activate</a>
+										<a class="btn btn-sm btn-default" ng-click="onReject(provider)">Reject</a>
+									</td>
+									<td>
+										<span>{{provider.principal.name}}</span>
+									</td>
+									<td>
+										<span>{{provider.principal.phone}}</span>
+									</td>
+									<td>
+										<span>{{provider.principal.email}}</span>
+									</td>
+									<td>
+										<span>{{provider.principal.address.line1}} {{provider.principal.address.city}}, {{provider.principal.address.state}} {{provider.principal.address.zip}}</span>
+									</td>
+									<td>
+										<a ng-href="{{provider.profile.website}}" target="_blank">{{provider.profile.website}}</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+
+
+					<div ng-switch-when="rejected">
+						<div ng-show="rejectedProviders.length === 0" class="alert alert-warning fade in">
+							<span>There are no rejected providers at this time</span>
+						</div>
+
+						<table ng-show="rejectedProviders.length > 0" class="table table-condensed table-bordered table-striped">
+							<thead>
+								<tr>
+									<th class="action">Action</th>
+									<th class="">Name</th>
+									<th class="">Phone</th>
+									<th class="">Email</th>
+									<th class="">Address</th>
+									<th class="">Website</th>
+								</tr>
+							</thead>
+
+							<tbody data-ng-repeat="provider in rejectedProviders | filter: {$: searchText}">
+								<tr>
+									<td>
+										<a class="btn btn-sm btn-default" ng-click="onActive(provider)">Activate</a>
+									</td>
+									<td>
+										<span>{{provider.principal.name}}</span>
+									</td>
+									<td>
+										<span>{{provider.principal.phone}}</span>
+									</td>
+									<td>
+										<span>{{provider.principal.email}}</span>
+									</td>
+									<td>
+										<span>{{provider.principal.address.line1}} {{provider.principal.address.city}}, {{provider.principal.address.state}} {{provider.principal.address.zip}}</span>
+									</td>
+									<td>
+										<a ng-href="{{provider.profile.website}}" target="_blank">{{provider.profile.website}}</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

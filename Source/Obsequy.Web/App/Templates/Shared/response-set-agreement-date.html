@@ -1,0 +1,17 @@
+﻿
+<td>
+	<span>{{ description }}</span>
+</td>
+
+<td>
+	<span>{{ (scheduleText | date : date : format) || "Not specified" }}</span>
+	<div ng-show="isAlternate">
+        <input class="form-control" ng-model="specifiedText" type="date" style="margin-top: 10px;">
+	</div>
+</td>
+
+<td>
+	<button class="btn" style="margin: 2px;" ng-click="setAgreement('isAgreed')" ng-class="{ 'btn-tales-one': isAgreed, 'btn-default': !isAgreed }">Yes</button>
+	<button class="btn" style="margin: 2px;" ng-click="setAgreement('isNotAgreed')" ng-class="{ 'btn-tales-one': isNotAgreed, 'btn-default': !isNotAgreed }">No</button>
+	<button class="btn" style="margin: 2px;" ng-click="setAgreement('isAlternate')" ng-class="{ 'btn-tales-one': isAlternate, 'btn-default': !isAlternate }">Alt</button>
+</td>

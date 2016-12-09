@@ -1,0 +1,137 @@
+﻿
+<div class="preferences-agreements-template-section-header">SCHEDULE</div>
+<div ng-show="response.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.PrePlan.value" class="preferences-agreements-template-item">
+	<p>Pre-Planning Funeral Only</p>
+	<br />
+</div>
+<div ng-show="response.schedule.anyScheduleSelections">
+	<table class="table table-condensed table-bordered table-striped preferences-agreements-template-item">
+		<thead>
+			<tr>
+				<th class="preferences-agreements-tr-heading-description">Description</th>
+				<th class="preferences-agreements-tr-heading-selection">Selection</th>
+				<th class="preferences-agreements-tr-heading-agreement">Can Provide?</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr response-set-agreement-date description="Wake Date" key="wakeDate" ng-model="response"></tr>
+
+			<tr response-set-agreement-date description="Funeral Date" key="ceremonyDate" ng-model="response"></tr>
+
+		</tbody>
+	</table>
+	<br />
+</div>
+
+<div>
+	<div class="preferences-agreements-template-section-header">SERVICE SELECTIONS</div>
+	<table ng-show="response.preference.anyServiceSelections" class="table table-condensed table-bordered table-striped preferences-agreements-template-item">
+		<thead>
+			<tr>
+				<th class="preferences-agreements-tr-heading-description">Description</th>
+				<th class="preferences-agreements-tr-heading-selection">Selection</th>
+				<th class="preferences-agreements-tr-heading-agreement">Can Provide?</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr response-set-agreement-list description="Internment" key="internmentType" enum-key="internmentTypes" ng-model="response"></tr>
+
+			<tr response-set-agreement-list description="Funeral Style" key="funeralType" enum-key="funeralTypes" ng-model="response"></tr>
+
+			<tr response-set-agreement-list description="Wake Style" key="wakeType" enum-key="wakeTypes" ng-model="response"></tr>
+
+			<tr response-set-agreement-list description="Religion" key="religionType" enum-key="religionTypes" ng-model="response"></tr>
+
+			<tr response-set-agreement-list description="Expected Attendance" key="expectedAttendanceType" enum-key="expectedAttendanceTypes" ng-model="response"></tr>
+
+			<tr response-set-agreement-text description="Service Preferences" key="servicePreferences" ng-model="response"></tr>
+
+		</tbody>
+	</table>
+	<div ng-show="!response.preference.anyServiceSelections" class="preferences-agreements-template-item">
+		<p><b>No service selections defined</b></p>
+	</div>
+	<br />
+</div>
+
+<div>
+	<div class="preferences-agreements-template-section-header">CASKET SELECTIONS</div>
+	<table ng-show="response.preference.anyCasketSelections" class="table table-condensed table-bordered table-striped preferences-agreements-template-item">
+		<thead>
+			<tr>
+				<th class="preferences-agreements-tr-heading-description">Description</th>
+				<th class="preferences-agreements-tr-heading-selection">Selection</th>
+				<th class="preferences-agreements-tr-heading-agreement">Can Provide?</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr response-set-agreement-list description="Casket Material" key="casketMaterialType" enum-key="casketMaterialTypes" ng-model="response"></tr>
+
+			<tr response-set-agreement-list description="Casket Size" key="casketSizeType" enum-key="casketSizeTypes" ng-model="response"></tr>
+
+			<tr response-set-agreement-list description="Casket Color" key="casketColorType" enum-key="casketColorTypes" ng-model="response"></tr>
+
+			<tr response-set-agreement-list description="Casket Manufacturer" key="casketManufacturerType" enum-key="casketManufacturerTypes" ng-model="response"></tr>
+
+			<tr response-set-agreement-list description="Burial Container" key="burialContainerType" enum-key="burialContainerTypes" ng-model="response"></tr>
+
+		</tbody>
+	</table>
+	<div ng-show="!response.preference.anyCasketSelections" class="preferences-agreements-template-item">
+		<p><b>No casket selections defined</b></p>
+	</div>
+	<br />
+</div>
+
+<div>
+	<div class="preferences-agreements-template-section-header">TRANSPORTATION SELECTIONS</div>
+	<table ng-show="response.preference.anyTransportationSelections" class="table table-condensed table-bordered table-striped preferences-agreements-template-item">
+		<thead>
+			<tr>
+				<th class="preferences-agreements-tr-heading-description">Description</th>
+				<th class="preferences-agreements-tr-heading-selection">Selection</th>
+				<th class="preferences-agreements-tr-heading-agreement">Can Provide?</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr response-set-agreement-list description="Family Transportation" key="transportationOfFamilyType" enum-key="transportationOfFamilyTypes" ng-model="response"></tr>
+
+		</tbody>
+	</table>
+	<div ng-show="!response.preference.anyTransportationSelections" class="preferences-agreements-template-item">
+		<p><b>No transportation selections defined</b></p>
+	</div>
+	<br />
+</div>
+
+<div>
+	<div class="preferences-agreements-template-section-header">FLORAL SELECTIONS</div>
+	<table ng-show="response.preference.anyFlowerSelections" class="table table-condensed table-bordered table-striped preferences-agreements-template-item">
+		<thead>
+			<tr>
+				<th class="preferences-agreements-tr-heading-description">Description</th>
+				<th class="preferences-agreements-tr-heading-selection">Selection</th>
+				<th class="preferences-agreements-tr-heading-agreement">Can Provide?</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr response-set-agreement-list description="Flower Spray" key="flowerSprayType" enum-key="flowerSprayTypes" ng-model="response"></tr>
+
+			<tr response-set-agreement-list description="Primary Flower" key="primaryFlowerType" enum-key="flowerTypes" ng-model="response"></tr>
+
+			<tr response-set-agreement-list description="Secondary Flower" key="secondaryFlowerType" enum-key="flowerTypes" ng-model="response"></tr>
+
+			<tr response-set-agreement-list description="Accent Flower" key="accentFlowerType" enum-key="flowerTypes" ng-model="response"></tr>
+
+		</tbody>
+	</table>
+	<div ng-show="!response.preference.anyFlowerSelections" class="preferences-agreements-template-item">
+		<p><b>No flower selections defined</b></p>
+	</div>
+	<br />
+</div>

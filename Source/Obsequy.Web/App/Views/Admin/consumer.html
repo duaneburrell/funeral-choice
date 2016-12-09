@@ -1,0 +1,192 @@
+﻿<style>
+    ul {
+        font-size: 13px;
+    }
+
+    .tab-content {
+        padding-top: 10px;
+    }
+</style>
+
+<div class="widewrapper main">
+    <div class="container ob-container">
+
+        <div>
+            <div class="col-md-5 col-md-offset-1">
+                <div class="alert alert-accepted notification accepted-color">
+                    <h4>Member: <span><b>{{ member.fullName }}</b></span></h4>
+                    <div class="clear"></div>
+
+                    <ul>
+                        <li class="arrow2"><span>Email: </span><span>{{ member.email }}</span></li>
+                        <li class="arrow2"><span>Status: </span><span account-status="{{ member.accountStatus }}"></span></li>
+                        <li class="arrow2"><span>Created: </span><span>{{ member.created.on | date:'MM/dd/yyyy @ h:mma' }}</span></li>
+                        <li class="arrow2"><span>Modified: </span><span>{{ member.modified.on | date:'MM/dd/yyyy @ h:mma' }}</span></li>
+                        <li class="arrow2"><span>ID: </span><span>{{ member.id }}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="col-md-5">
+                <div class="alert alert-accepted notification accepted-color">
+                    <h4>Portfolio: <span><b>{{ portfolio.principal.fullName }}</b></span></h4>
+                    <div class="clear"></div>
+
+                    <ul>
+                        <li class="arrow2">
+                            <span ng-show="portfolio.totalResponsesAcknowledged === 1">1 quote received</span>
+                            <span ng-show="portfolio.totalResponsesAcknowledged !== 1">{{ portfolio.totalResponsesAcknowledged }} quotes received</span>
+
+                            <span ng-show="portfolio.totalResponsesGenerated === 1">(of 1 matched)</span>
+                            <span ng-show="portfolio.totalResponsesGenerated !== 1">(of {{ portfolio.totalResponsesGenerated }} matched)</span>
+                        </li>
+                        <li class="arrow2">
+                            <span>State: </span><span request-receipt-state="{{ portfolio.request.current.state }}"></span>
+                            <span ng-show="portfolio.request.state === enum.requestReceiptStates.Completed.value">, Transaction ID: </span><strong>{{ portfolio.payment.transactionId }}</strong>
+                        </li>
+                        <li class="arrow2"><span>Created: </span><span>{{ portfolio.created.on | date:'MM/dd/yyyy @ h:mma' }}</span></li>
+                        <li class="arrow2"><span>Modified: </span><span>{{ portfolio.modified.on | date:'MM/dd/yyyy @ h:mma' }}</span></li>
+                        <li class="arrow2"><span>ID: </span><span>{{ portfolio.id }}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix" />
+
+        
+        
+         <div class="row" ng-show="portfolio.request.state === enum.requestReceiptStates.Draft.value">
+            <div class="col-md-5 col-md-offset-1">
+                <a class="btn btn-default btn-block" ng-click="onDelete()">Delete</a>
+            </div>
+             <div class="col-md-5">
+                <a class="btn btn-tales-two btn-block" ng-click="onSendReminder()">Send Reminder<span ng-hide="portfolio.reminded.isEmpty"> - Last sent on {{ portfolio.reminded.on | date:'MM/dd/yyyy @ h:mma' }}</span></a>
+            </div>
+        </div>
+        <div class="clearfix" />
+
+
+
+        <div class="tabbable tabs-left">
+            <ul class="nav nav-tabs">
+
+                <li ng-class="{active: selectedTab == 'request'}">
+                    <a ng-click="selectedTab = 'request'" href="">Request</a>
+                </li>
+
+                <li ng-class="{active: selectedTab == 'responded'}">
+                    <a ng-click="selectedTab = 'responded'" href="">Responded ({{ portfolio.totalResponsesAcknowledged }})</a>
+                </li>
+
+                <li ng-class="{active: selectedTab == 'available'}">
+                    <a ng-click="selectedTab = 'available'" href="">Available ({{ portfolio.totalResponsesAvailable }})</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div ng-switch="selectedTab">
+
+                    <div ng-switch-when="request">
+                        <div ng-include="'/App/Templates/Shared/request-view-preferences.html'" />
+                    </div>
+
+
+
+                    <div ng-switch-when="responded">
+                        <div ng-show="portfolio.totalResponsesAcknowledged === 0" class="alert alert-warning fade in">
+                            <span>No responses that have been submitted at this time</span>
+                        </div>
+
+                        <div ng-repeat="response in portfolio.responsesAccepted">
+                            <div class="alert alert-accepted notification accepted-color" ng-click="$parent.toggleResponse(response)">
+                                <ul>
+                                    <li class="arrow2"><span>Provider: </span><strong>{{ response.principal.name }}</strong><i class="glyphicon glyphicon-thumbs-up pull-right"></i></li>
+                                    <li class="arrow2"><span>Distance: </span><strong>{{ response.distance }} miles ({{ response.principal.address.city }}, {{ response.principal.address.state }})</strong></li>
+                                    <li class="arrow2"><span>Quote: </span><strong>{{ response.quote | currency:"$" }}</strong></li>
+                                    <li class="arrow2"><span>Deposit Paid: </span><strong>{{ response.depositPaid | currency:"$" }}</strong></li>
+                                    <li class="arrow2"><span>Balance Due: </span><strong>{{ response.balanceDue | currency:"$" }}</strong></li>
+                                    <li class="arrow2"><span>Accepted: </span><strong>{{ response.current.on | date:'MM/dd/yyyy @ h:mma' }}</strong></li>
+                                    <li class="arrow2"><span>Available: </span><strong>{{ response.created.on | date:'MM/dd/yyyy @ h:mma' }}</strong></li>
+                                    <li class="arrow2"><span>ID: </span><span>{{ response.id }}</span></li>
+                                </ul>
+                                <div class="clearfix" />
+                            </div>
+
+                            <div ng-include="'/App/Templates/Shared/response-view-agreements.html'" ng-show="$parent.visibleResponseId === response.id" />
+                        </div>
+
+
+                        <div ng-repeat="response in portfolio.responsesPending">
+                            <div class="alert alert-pending notification pending-color" ng-click="$parent.toggleResponse(response)">
+                                <ul>
+                                    <li class="arrow2"><span>Provider: </span><strong>{{ response.principal.name }}</strong><i class="glyphicon glyphicon-hand-right pull-right"></i></li>
+                                    <li class="arrow2"><span>Distance: </span><strong>{{ response.distance }} miles ({{ response.principal.address.city }}, {{ response.principal.address.state }})</strong></li>
+                                    <li class="arrow2"><span>Quote: </span><strong>{{ response.quote | currency:"$" }}</strong></li>
+                                    <li class="arrow2"><span>Pending: </span><strong>{{ response.current.on | date:'MM/dd/yyyy @ h:mma' }}</strong></li>
+                                    <li class="arrow2"><span>Available: </span><strong>{{ response.created.on | date:'MM/dd/yyyy @ h:mma' }}</strong></li>
+                                    <li class="arrow2"><span>ID: </span><span>{{ response.id }}</span></li>
+                                </ul>
+                                <div class="clearfix" />
+                            </div>
+
+                            <div ng-include="'/App/Templates/Shared/response-view-agreements.html'" ng-show="$parent.visibleResponseId === response.id" />
+                        </div>
+
+
+                        <div ng-repeat="response in portfolio.responsesRejected">
+                            <div class="alert alert-rejected notification rejected-color" ng-click="$parent.toggleResponse(response)">
+                                <ul>
+                                    <li class="arrow2"><span>Provider: </span><strong>{{ response.principal.name }}</strong><i class="glyphicon glyphicon-thumbs-down pull-right"></i></li>
+                                    <li class="arrow2"><span>Distance: </span><strong>{{ response.distance }} miles ({{ response.principal.address.city }}, {{ response.principal.address.state }})</strong></li>
+                                    <li class="arrow2"><span>Quote: </span><strong>{{ response.quote | currency:"$" }}</strong></li>
+                                    <li class="arrow2"><span>Rejected: </span><strong>{{ response.current.on | date:'MM/dd/yyyy @ h:mma' }}</strong></li>
+                                    <li class="arrow2"><span>Available: </span><strong>{{ response.created.on | date:'MM/dd/yyyy @ h:mma' }}</strong></li>
+                                    <li class="arrow2"><span>ID: </span><span>{{ response.id }}</span></li>
+                                </ul>
+                                <div class="clearfix" />
+                            </div>
+
+                            <div ng-include="'/App/Templates/Shared/response-view-agreements.html'" ng-show="$parent.visibleResponseId === response.id" />
+                        </div>
+                    </div>
+
+
+
+                    <div ng-switch-when="available">
+                        <div ng-show="portfolio.totalResponsesAvailable === 0" class="alert alert-warning fade in">
+                            <span>No responses that are available for bidding or that have been dismissed at this time</span>
+                        </div>
+
+                        <div ng-repeat="response in portfolio.responsesAvailable">
+                            <div class="alert alert-available notification available-color">
+                                <ul>
+                                    <li class="arrow2"><span>Provider: </span><strong>{{ response.principal.name }}</strong><i class="glyphicon glyphicon-star pull-right"></i></li>
+                                    <li class="arrow2"><span>Distance: </span><strong>{{ response.distance }} miles ({{ response.principal.address.city }}, {{ response.principal.address.state }})</strong></li>
+                                    <li class="arrow2"><span>Available: </span><strong>{{ response.current.on | date:'MM/dd/yyyy @ h:mma' }}</strong></li>
+                                    <li class="arrow2"><span>ID: </span><span>{{ response.id }}</span></li>
+                                </ul>
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+
+                        <div ng-repeat="response in portfolio.responsesDismissed">
+                            <div class="alert alert-dismissed notification dismissed-color">
+                                <ul>
+                                    <li class="arrow2"><span>Provider: </span><strong>{{ response.principal.name }}</strong><i class="glyphicon glyphicon-thumbs-up pull-right"></i></li>
+                                    <li class="arrow2"><span>Distance: </span><strong>{{ response.distance }} miles ({{ response.principal.address.city }}, {{ response.principal.address.state }})</strong></li>
+                                    <li class="arrow2"><span>Dismissed: </span><strong>{{ response.current.on | date:'MM/dd/yyyy @ h:mma' }}</strong></li>
+                                    <li class="arrow2"><span>Available: </span><strong>{{ response.created.on | date:'MM/dd/yyyy @ h:mma' }}</strong></li>
+                                    <li class="arrow2"><span>ID: </span><span>{{ response.id }}</span></li>
+                                </ul>
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

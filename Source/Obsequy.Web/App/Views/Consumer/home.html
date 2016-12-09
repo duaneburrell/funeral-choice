@@ -1,0 +1,104 @@
+﻿<div class="widewrapper main">
+	<div class="container ob-container">
+
+		<br />
+		<div class="row">
+			<div class="col-md-4">
+				<img src="/Content/images/consumer_home_1.jpg" style="max-width: 100%; width: 100%; border: 2px solid black;" />
+			</div>
+
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-1 col-md-offset-1">
+						<img src="/Content/images/start_quotes.jpg" style="width: 32px;" />
+					</div>
+					<p class="col-md-9 lead"><i>Perhaps they are not stars but rather openings</i></p>
+				</div>
+				<div class="row">
+					<p class="col-md-8 col-md-offset-2 lead"><i>in Heaven where the love of our lost ones</i></p>
+				</div>
+				<div class="row">
+					<p class="col-md-7 col-md-offset-2 lead"><i>shines down to let us know they are happy</i></p>
+					<div class="col-md-1">
+						<img src="/Content/images/end_quotes.jpg" style="width: 32px;" />
+					</div>
+				</div>
+				<div class="row">
+					<h1 class="col-md-8 col-md-offset-6 lead">Eskimo Legend</h1>
+				</div>
+			</div>
+		</div>
+
+		<br />
+		<div class="">
+			<p class="col-md-8">A portfolio describes the type of memorial service you are seeking. Within a Portfolio you'll specify each detail, from location, to internment, to scheduling of visitation and final wishes.</p>
+			<a class="btn btn-tales-one btn-lg col-md-3 col-md-offset-1" href="#/portfolio">Create Portfolio</a>
+		</div>
+
+		<div class="clearfix" style="margin-bottom: 20px;" />
+
+		<hr />
+
+		<div ng-hide="data.anyPortfolios">
+			<div class="alert alert-info">You currently have no portfolios</div>
+		</div>
+
+		<div ng-show="data.anyPortfolios">
+			<div ng-repeat="portfolio in data.portfoliosAll">
+
+				<div class="alert alert-warning col-md-5 col-md-offset-1">
+					<i class="glyphicon glyphicon-remove pull-right" ng-show="portfolio.canDelete" ng-click="onDeletePortfolio(portfolio)"></i>
+					<div class="row">
+						<h4 class="span.glyphicon col-md-offset-1">Your Portfolio for <strong>{{ portfolio.principal.fullName }}</strong></h4>
+						<hr class="hr_margins" />
+						<ul style="font-size: 13px;">
+							<li class="arrow2"><span>Created On: </span><span>{{ (portfolio.created.on | date : date : format) || "Not specified" }}</span></li>
+							
+							<li class="arrow2"><span>Location: </span><span>{{ portfolio.preference.proximity.city || "Not specified"}}<span ng-show="portfolio.preference.proximity.state">,</span> {{ portfolio.preference.proximity.state}}</li>
+							
+							<li class="arrow2" ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.None.value"><span>Funeral: </span><span>{{ (portfolio.schedule.ceremonyDate | date : date : format) || "Not specified"}}</span></li>
+							<li class="arrow2" ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.Scheduled.value"><span>Funeral: </span><span>{{ (portfolio.schedule.ceremonyDate | date : date : format) || "Not specified"}}</span></li>
+							<li class="arrow2" ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.PrePlan.value"><span>Pre-Planning Funeral Only</span></li>
+
+							<li class="arrow2" ng-show="portfolio.request.state === enum.requestReceiptStates.Draft.value">
+								<span ng-show="portfolio.canSubmit"><b>Draft: can be submitted for bidding</b></span>
+								<span ng-hide="portfolio.canSubmit">Draft: {{ portfolio.percentComplete }}% complete</span>
+							</li>
+							<li class="arrow2" ng-show="portfolio.request.state === enum.requestReceiptStates.Pending.value">
+								<span>Pending: </span>
+
+								<span ng-show="portfolio.totalResponsesAcknowledged === 1">1 quote received</span>
+								<span ng-show="portfolio.totalResponsesAcknowledged !== 1">{{ portfolio.totalResponsesAcknowledged }} quotes received</span>
+								
+								<span ng-show="portfolio.totalResponsesGenerated === 1">(of 1 matched)</span>
+								<span ng-show="portfolio.totalResponsesGenerated !== 1">(of {{ portfolio.totalResponsesGenerated }} matched)</span>
+							</li>
+							<li class="arrow2" ng-show="portfolio.request.state === enum.requestReceiptStates.Completed.value">
+								<span>Completed: </span><span>{{ (portfolio.modified.on | date : date : format) || "Not specified" }}</span>
+							</li>
+					</div>
+					<hr class="hr_margins" />
+					<div class="row" ng-show="portfolio.request.current.state === enum.requestReceiptStates.Draft.value">
+						<a class="btn btn-default col-md-3 pull-right" style="margin-right: 10px;" ng-click="onPortfolioEdit(portfolio)" ng-show="portfolio.canSave">Edit</a>
+						<a class="btn btn-default col-md-4 pull-right" style="margin-right: 10px;" ng-click="onPortfolioReview(portfolio)" ng-show="portfolio.canSubmit">Review & Submit</a>
+					</div>
+
+					<div class="row" ng-show="portfolio.request.current.state === enum.requestReceiptStates.Pending.value">
+						<a class="btn btn-default col-md-3 pull-right" style="margin-right: 10px;" ng-click="onPortfolioReview(portfolio)">Detail View</a>
+						<a class="btn btn-default col-md-3 pull-right" style="margin-right: 10px;" ng-show="portfolio.totalResponsesAcknowledged === 1" ng-click="onPortfolioQuotes(portfolio)">Review Bid</a>
+						<a class="btn btn-default col-md-3 pull-right" style="margin-right: 10px;" ng-show="portfolio.totalResponsesAcknowledged > 1" ng-click="onPortfolioQuotes(portfolio)">Review Bids ({{ portfolio.totalResponsesAcknowledged }})</a>
+					</div>
+
+					<div class="row" ng-show="portfolio.request.current.state === enum.requestReceiptStates.Completed.value">
+						<a class="btn btn-default col-md-3 pull-right" style="margin-right: 10px;" ng-click="onPortfolioReview(portfolio)">Detail View</a>
+						<a class="btn btn-default col-md-3 pull-right" style="margin-right: 10px;" ng-show="portfolio.totalResponsesAcknowledged !== 1" ng-click="onPortfolioQuotes(portfolio)">View All ({{ portfolio.totalResponsesAcknowledged }})</a>
+						<a class="btn btn-default col-md-3 pull-right" style="margin-right: 10px;" ng-click="onPortfolioQuote(portfolio)">View Accepted</a>
+					</div>
+
+					<div class="clearfix" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

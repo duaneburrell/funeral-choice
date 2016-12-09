@@ -1,0 +1,42 @@
+﻿
+<td>
+	<span>{{ description }}</span>
+</td>
+
+<td>
+
+	<span>{{ preferenceText }}</span>
+
+	<div ng-show="hasSelectedPreference">
+		<div ng-show="isAlternate">
+
+			<div ng-show="enumerations.length > 0">
+				<div ng-repeat="enumeration in enumerations">
+					<div ng-if="enumeration.value !== 1000">
+						<div class="checkbox-list-item">
+							<input type="radio" data-group-name-replace-me ng-value="enumeration.value" ng-model="$parent.$parent.alternateValue" />&nbsp;<span>{{ enumeration.text }}</span>
+						</div>
+					</div>
+					<div ng-if="enumeration.value === 1000">
+						<input type="radio" data-group-name-replace-me ng-value="enumeration.value" ng-model="$parent.$parent.alternateValue" /><span style="margin-left: 4px;">Specify alternate below:</span>
+						<input class="form-control" ng-model="$parent.$parent.specifiedText" ng-disabled="!$parent.$parent.isUserSpecified" style="margin-top: 10px;" />
+					</div>
+				</div>
+			</div>
+
+			<div ng-show="enumerations.length === 0">
+				<textarea class="form-control" rows="4" ng-model="specifiedText" style="margin-top: 10px;" />
+			</div>
+		</div>
+	</div>
+</td>
+
+<td>
+
+	<div ng-show="hasSelectedPreference">
+
+		<button class="btn" style="margin: 2px;" ng-click="setAgreement('isAgreed')" ng-class="{ 'btn-tales-one': isAgreed, 'btn-default': !isAgreed }">Yes</button>
+		<button class="btn" style="margin: 2px;" ng-click="setAgreement('isNotAgreed')" ng-class="{ 'btn-tales-one': isNotAgreed, 'btn-default': !isNotAgreed }">No</button>
+		<button class="btn" style="margin: 2px;" ng-click="setAgreement('isAlternate')" ng-class="{ 'btn-tales-one': isAlternate, 'btn-default': !isAlternate }">Alt</button>
+	</div>
+</td>

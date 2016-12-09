@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BE5EE27E-E069-4375-8270-EC4F75A11D67}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Obsequy.Model</RootNamespace>
+    <AssemblyName>Obsequy.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Braintree-2.34.1">
+      <HintPath>..\packages\Braintree.2.34.1\lib\Braintree-2.34.1.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentMongo">
+      <HintPath>..\packages\FluentMongo.1.3.1.1\lib\FluentMongo.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentValidation.5.4.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMapsApi, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\GoogleMapsApi.0.40.0.0\lib\net45\GoogleMapsApi.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=1.9.0.200, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\mongocsharpdriver.1.9.0\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=1.9.0.200, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\mongocsharpdriver.1.9.0\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Web">
+      <HintPath>..\packages\MongoDB.Web.1.3.0\lib\MongoDB.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoRepository.Net45, Version=1.6.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MongoRepository.1.6.4\lib\net45\MongoRepository.Net45.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=3.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\DatabaseHelper.cs" />
+    <Compile Include="Data\MongoDbContext.cs" />
+    <Compile Include="Form\AdministratorRegistrationForm.cs" />
+    <Compile Include="Form\ConsumerRegistrationForm.cs" />
+    <Compile Include="Form\LoginForm.cs" />
+    <Compile Include="Form\PasswordRecoveryForm.cs" />
+    <Compile Include="Form\ProviderRegistrationForm.cs" />
+    <Compile Include="Form\ResponseForm.cs" />
+    <Compile Include="Form\Validator\AdministratorRegistrationFormValidator.cs" />
+    <Compile Include="Form\Validator\ConsumerRegistrationFormValidator.cs" />
+    <Compile Include="Form\Validator\LoginFormValidator.cs" />
+    <Compile Include="Form\Validator\PasswordRecoveryFormValidator.cs" />
+    <Compile Include="Form\Validator\ProviderRegistrationFormValidator.cs" />
+    <Compile Include="Form\Validator\ResponseFormValidator.cs" />
+    <Compile Include="Helper\ConsumerPortfolioComparer.cs" />
+    <Compile Include="Model\Entity\Address.cs" />
+    <Compile Include="Model\Entity\AdminMember.cs" />
+    <Compile Include="Model\Entity\ChangeReceipt.cs" />
+    <Compile Include="Model\Entity\ConsumerMember.cs" />
+    <Compile Include="Model\Entity\ConsumerPortfolio.cs" />
+    <Compile Include="Model\Entity\ConsumerPreference.cs" />
+    <Compile Include="Model\Entity\ConsumerPrincipal.cs" />
+    <Compile Include="Model\Entity\ConsumerRequest.cs" />
+    <Compile Include="Model\Entity\ConsumerSchedule.cs" />
+    <Compile Include="Model\Entity\Payment.cs" />
+    <Compile Include="Model\Entity\Membership.cs" />
+    <Compile Include="Model\Entity\ProviderMember.cs" />
+    <Compile Include="Model\Entity\ProviderPortfolio.cs" />
+    <Compile Include="Model\Entity\ProviderPrincipal.cs" />
+    <Compile Include="Model\Entity\ProviderProfile.cs" />
+    <Compile Include="Model\Entity\Proximity.cs" />
+    <Compile Include="Model\Entity\RequestReceipt.cs" />
+    <Compile Include="Model\Entity\Response.cs" />
+    <Compile Include="Model\Entity\ResponseAgreement.cs" />
+    <Compile Include="Model\Entity\ResponseAlternate.cs" />
+    <Compile Include="Model\Entity\ResponseReceipt.cs" />
+    <Compile Include="Model\Validator\AddressValidator.cs" />
+    <Compile Include="Model\Validator\ConsumerMemberValidator.cs" />
+    <Compile Include="Model\Validator\ConsumerPreferenceValidator.cs" />
+    <Compile Include="Model\Validator\ConsumerPrincipalValidator.cs" />
+    <Compile Include="Model\Validator\ConsumerRequestValidator.cs" />
+    <Compile Include="Model\Validator\ConsumerScheduleValidator.cs" />
+    <Compile Include="Model\Validator\AdminMemberValidator.cs" />
+    <Compile Include="Model\Validator\PaymentValidator.cs" />
+    <Compile Include="Model\Validator\ResponseAlternateValidator.cs" />
+    <Compile Include="Model\Validator\ResponseAgreementValidator.cs" />
+    <Compile Include="Model\Validator\ProviderMemberValidator.cs" />
+    <Compile Include="Model\Validator\ProviderPortfolioValidator.cs" />
+    <Compile Include="Model\Validator\ProviderPrincipalValidator.cs" />
+    <Compile Include="Model\Validator\ProviderProfileValidator.cs" />
+    <Compile Include="Model\Validator\ProximityValidator.cs" />
+    <Compile Include="Model\Validator\ResponseValidator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scheme\Enitity\ConsumerPortfolioScheme.cs" />
+    <Compile Include="Scheme\Enitity\ConsumerResponseScheme.cs" />
+    <Compile Include="Scheme\Enitity\ProviderPortfolioScheme.cs" />
+    <Compile Include="Scheme\Enitity\ProviderResponseScheme.cs" />
+    <Compile Include="Scheme\Validator\ConsumerResponseSchemeValidator.cs" />
+    <Compile Include="Model\Validator\ConsumerPortfolioValidator.cs" />
+    <Compile Include="Scheme\Validator\ProviderResponseSchemeValidator.cs" />
+    <Compile Include="Session\AccountSession.cs" />
+    <Compile Include="Special\Dto\PropertyDto.cs" />
+    <Compile Include="Special\Tuple.cs" />
+    <Compile Include="Special\Validator\PropertyValidator.cs" />
+    <Compile Include="Validation\Definitions.cs" />
+    <Compile Include="Validation\FluentValidationAuthorizations.cs" />
+    <Compile Include="Validation\FluentValidationExtensions.cs" />
+    <Compile Include="Validation\FluentValidationModels.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Obsequy.Utility\Obsequy.Utility.csproj">
+      <Project>{d1491243-9aa6-4008-a0da-9390c5827538}</Project>
+      <Name>Obsequy.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MongoRepository.chm" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,231 @@
+﻿<div class="widewrapper main">
+	<div class="container col-lg-offset-3">
+
+		<div class="row">
+			<div class="col-md-4">
+				<select class="form-control" ng-model="profilerPrincipal.key" ng-options="i for i in profilerPrincipal.keys" ng-change="profilerPrincipal.onKeyChanged()" ng-show="profilerPrincipal.isVisible"></select>
+			</div>
+			<div class="col-md-4">
+				<select class="form-control" ng-model="profilerProfile.key" ng-options="i for i in profilerProfile.keys" ng-change="profilerProfile.onKeyChanged()" ng-show="profilerProfile.isVisible"></select>
+			</div>
+		</div>
+
+		<!-- principal -->
+		<h2>Your Business Information</h2>
+		<div class="row">
+			<p class="col-md-9">Your account provides us with the critical details necessary for connecting you with customers in need of mortuarial services, including your business name, address and contact information.</p>
+		</div>
+		<br />
+		<br />
+
+		<div class="row">
+			<div class="form-group col-md-4">
+				<span>Business Name </span><span class="validation-error pull-right" invalid-property property="principal.name"></span>
+				<input class="form-control" ng-model="portfolio.principal.name">
+			</div>
+
+			<div class="form-group col-md-4 col-md-offset-1">
+				<span>Address Line 1 </span><span class="validation-error pull-right" invalid-property property="principal.address.line1"></span>
+				<input class="form-control" ng-model="portfolio.principal.address.line1">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-4">
+				<span>Business Phone </span><span class="validation-error pull-right" invalid-property property="principal.phone"></span>
+				<input class="form-control" ng-model="portfolio.principal.phone">
+			</div>
+
+			<div class="form-group col-md-4 col-md-offset-1">
+				<span>Address Line 2 </span><span class="validation-error pull-right" invalid-property property="principal.address.line2"></span>
+				<input class="form-control" ng-model="portfolio.principal.address.line2">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-4">
+				<span>Business Email </span><span class="validation-error pull-right" invalid-property property="principal.email"></span>
+				<input class="form-control" ng-model="portfolio.principal.email">
+			</div>
+
+			<div class="form-group col-md-2 col-md-offset-1">
+				<span>City </span><span class="validation-error pull-right" invalid-property property="principal.address.city"></span>
+				<input class="form-control" ng-model="portfolio.principal.address.city">
+			</div>
+
+			<div class="form-group col-md-1">
+				<span>State </span>
+				<select class="form-control" ng-model="portfolio.principal.address.state" ng-options="item.text as item.text for item in enum.states"></select>
+				<span class="validation-error pull-right" invalid-property property="principal.address.state"></span>
+			</div>
+
+			<div class="form-group col-md-1">
+				<span>Zip </span>
+				<input class="form-control" ng-model="portfolio.principal.address.zip">
+				<span class="validation-error pull-right" invalid-property property="principal.address.zip"></span>
+			</div>
+		</div>
+
+		<div class="row" ng-show="isNew">
+			<br />
+			<a class="btn btn-tales-one btn-lg col-md-9" ng-click="onCreatePortfolio()">Next</a>
+			<div class="clearfix" />
+			<br />
+		</div>
+
+		<!-- profile -->
+
+		<div class="well well-sm col-md-9" ng-hide="isNew">
+			<h2>About Your Funeral Home</h2>
+			<p>Families who accept your bids will see your business description and can see your web site.</p>
+
+			<div class="row">
+				<div class="form-group col-md-12">
+					<span>Description (required)</span><span class="validation-error pull-right" invalid-property property="profile.description"></span>
+					<textarea class="form-control" rows="5" ng-model="portfolio.profile.description" />
+				</div>
+			</div>
+
+			<div class="clearfix" />
+
+			<div class="row">
+				<div class="form-group col-md-12">
+					<span>Website Url (optional)</span><span class="validation-error pull-right" invalid-property property="profile.website"></span>
+					<br />
+					<small>URLs must have the format http://yourcompany.domain (e.g. http://www.funeral-choice.com)</small>
+					<input class="form-control" ng-model="portfolio.profile.website">
+				</div>
+			</div>
+
+			<div class="clearfix" />
+
+			<div class="row">
+				<div class="col-md-12">
+					<medium>Business has been established for: </medium><span class="validation-error" invalid-property property="profile.businessEstablished"></span>
+
+					<div class="form-group">
+						<div>
+							<input type="radio" class="form-group" name="businessEstablishedGroup" ng-value="1" ng-model="portfolio.profile.businessEstablished" />&nbsp;<span>Less Than 1 Year</span>
+						</div>
+						<div>
+							<input type="radio" class="form-group" name="businessEstablishedGroup" ng-value="2" ng-model="portfolio.profile.businessEstablished" />&nbsp;<span>1 to 5 Years</span>
+						</div>
+						<div>
+							<input type="radio" class="form-group" name="businessEstablishedGroup" ng-value="3" ng-model="portfolio.profile.businessEstablished" />&nbsp;<span>5 to 10 Years</span>
+						</div>
+						<div>
+							<input type="radio" class="form-group" name="businessEstablishedGroup" ng-value="4" ng-model="portfolio.profile.businessEstablished" />&nbsp;<span>More Than 10 Years</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<medium>Age of the funeral facility: </medium><span class="validation-error" invalid-property property="profile.facilityAge"></span>
+
+					<div class="form-group">
+						<div>
+							<input type="radio" class="form-group" name="facilityAgeGroup" ng-value="1" ng-model="portfolio.profile.facilityAge" />&nbsp;<span>Less Than 5 Years</span>
+						</div>
+						<div>
+							<input type="radio" class="form-group" name="facilityAgeGroup" ng-value="2" ng-model="portfolio.profile.facilityAge" />&nbsp;<span>5 to 10 Years</span>
+						</div>
+						<div>
+							<input type="radio" class="form-group" name="facilityAgeGroup" ng-value="3" ng-model="portfolio.profile.facilityAge" />&nbsp;<span>More Than 10 Years</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<medium>Funeral facility style: </medium><span class="validation-error" invalid-property property="profile.facilityStyle"></span>
+
+					<div>
+						<div class="col-md-6">
+							<div>
+								<input type="radio" class="form-group" name="facilityStyleGroup" ng-value="1" ng-model="portfolio.profile.facilityStyle" />&nbsp;<span>Simple</span>
+							</div>
+							<img class="img-rounded" src="/Content/images/facility-style-simple.jpg" alt="Simple">
+						</div>
+
+						<div class="col-md-6">
+							<div>
+								<input type="radio" class="form-group" name="facilityStyleGroup" ng-value="2" ng-model="portfolio.profile.facilityStyle" />&nbsp;<span>Traditional</span>
+							</div>
+							<img class="img-rounded" src="/Content/images/facility-style-traditional.jpg" alt="Traditional">
+						</div>
+
+						<div class="clearfix" />
+
+						<div class="col-md-6">
+							<div>
+								<input type="radio" class="form-group" name="facilityStyleGroup" ng-value="3" ng-model="portfolio.profile.facilityStyle" />&nbsp;<span>Modern</span>
+							</div>
+							<img class="img-rounded" src="/Content/images/facility-style-modern.jpg" alt="Modern">
+						</div>
+
+						<div class="col-md-6">
+							<div>
+								<input type="radio" class="form-group" name="facilityStyleGroup" ng-value="4" ng-model="portfolio.profile.facilityStyle" />&nbsp;<span>Lavish</span>
+							</div>
+							<img class="img-rounded" src="/Content/images/facility-style-lavish.jpg" alt="Elegant">
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<medium>Funeral directors' experience: </medium><span class="validation-error" invalid-property property="profile.funeralDirectorExperience"></span>
+
+					<div class="form-group">
+						<div>
+							<input type="radio" class="form-group" name="funeralDirectorExperienceGroup" ng-value="1" ng-model="portfolio.profile.funeralDirectorExperience" />&nbsp;<span>Less Than 1 Year</span>
+						</div>
+						<div>
+							<input type="radio" class="form-group" name="funeralDirectorExperienceGroup" ng-value="2" ng-model="portfolio.profile.funeralDirectorExperience" />&nbsp;<span>1 to 5 Years</span>
+						</div>
+						<div>
+							<input type="radio" class="form-group" name="funeralDirectorExperienceGroup" ng-value="3" ng-model="portfolio.profile.funeralDirectorExperience" />&nbsp;<span>5 to 10 Years</span>
+						</div>
+						<div>
+							<input type="radio" class="form-group" name="funeralDirectorExperienceGroup" ng-value="4" ng-model="portfolio.profile.funeralDirectorExperience" />&nbsp;<span>More Than 10 Years</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<medium>Transportation fleet age: </medium><span class="validation-error" invalid-property property="profile.transportationFleetAge"></span>
+
+					<div class="form-group">
+						<div>
+							<input type="radio" class="form-group" name="transportationFleetAgeGroup" ng-value="1" ng-model="portfolio.profile.transportationFleetAge" />&nbsp;<span>Less Than 1 Year</span>
+						</div>
+						<div>
+							<input type="radio" class="form-group" name="transportationFleetAgeGroup" ng-value="2" ng-model="portfolio.profile.transportationFleetAge" />&nbsp;<span>1 to 3 Years</span>
+						</div>
+						<div>
+							<input type="radio" class="form-group" name="transportationFleetAgeGroup" ng-value="3" ng-model="portfolio.profile.transportationFleetAge" />&nbsp;<span>4 to 6 Years</span>
+						</div>
+						<div>
+							<input type="radio" class="form-group" name="transportationFleetAgeGroup" ng-value="4" ng-model="portfolio.profile.transportationFleetAge" />&nbsp;<span>More Than 6 Years</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" ng-hide="isNew">
+			<br />
+			<a class="btn btn-tales-one btn-lg col-md-9" ng-click="onUpdatePortfolio()">Complete Profile</a>
+			<div class="clearfix" />
+			<br />
+		</div>
+
+	</div>
+

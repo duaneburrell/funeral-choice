@@ -1,0 +1,32 @@
+﻿
+<div class="title">
+	<div class="col-md-9 col-md-offset-1">
+		<div class="alert alert-rejected notification rejected-color">
+			<h4>Your bid has been <span><b>REJECTED</b></span></h4>
+			<div class="clear"></div>
+
+			<ul style="font-size: 13px;">
+				<li class="arrow2"><span>Distance: </span><span>{{ response.distance }} miles from {{ response.preference.proximity.city }}</span></li>
+				<li class="arrow2"><span>Quoted Price: </span><span>{{ response.quote | currency:"$" }}</span></li>
+				<li class="arrow2"><span>Requested On: </span><span>{{ (response.request.current.on | date : date : format) || "Not specified" }}</span></li>
+				<li class="arrow2"><span>Responded On: </span><span>{{ (response.pending.on | date : date : format) || "Not specified" }}</span></li>
+				<li class="arrow2"><span>Rejected On: </span><span>{{ (response.current.on | date : date : format) || "Not specified" }}</span></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="clearfix" />
+
+
+<div class="row">
+	<div class="col-md-9 col-md-offset-1">
+		<div ng-include="'/App/Templates/Shared/response-view-agreements.html'" />
+	</div>
+</div>
+
+<div class="row">
+	<a class="btn btn-tales-one col-md-9 col-md-offset-1" href="#/quotes">Back to Quotes</a>
+</div>
+
+<div class="clearfix" />
+<br />

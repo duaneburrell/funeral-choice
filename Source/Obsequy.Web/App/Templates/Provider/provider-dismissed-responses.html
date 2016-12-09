@@ -1,0 +1,24 @@
+﻿
+<section>
+	
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="">Preferred Location</th>
+				<th class="">Request Submitted</th>
+				<th class="">Request Dismissed</th>
+				<th class=""></th>
+			</tr>
+		</thead>
+		<tbody ng-repeat="response in data.responsesDismissed">
+			<tr>
+				<td><span>{{ response.preference.proximity.city }}</span>, <span>{{ response.preference.proximity.state }}</span></td>
+				<td><span>{{ (response.request.current.on | date : date : format) || "Not specified" }}</span></td>
+				<td><span>{{ (response.current.on | date : date : format) || "Not specified" }}</span></td>
+				<td>
+					<a ng-href="#/quote/{{ response.id }}">View</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</section>

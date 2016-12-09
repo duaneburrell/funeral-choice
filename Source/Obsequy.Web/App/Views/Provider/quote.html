@@ -1,0 +1,34 @@
+﻿<div class="widewrapper main">
+	<div class="container">
+
+		<br />
+		<div ng-show="response.id">
+			<section>
+				<div ng-show="{{ response.current.state === enum.responseReceiptStates.Available.value }}">
+					<div ng-include="'/App/Templates/Provider/provider-available-response.html'" />
+				</div>
+
+
+				<div ng-show="{{ response.current.state === enum.responseReceiptStates.Accepted.value }}">
+					<div ng-include="'/App/Templates/Provider/provider-accepted-response.html'" />
+				</div>
+
+
+				<div ng-show="{{ response.current.state === enum.responseReceiptStates.Rejected.value }}">
+					<div ng-include="'/App/Templates/Provider/provider-rejected-response.html'" />
+				</div>
+
+
+				<div ng-show="{{ response.current.state === enum.responseReceiptStates.Dismissed.value }}">
+					<div ng-include="'/App/Templates/Provider/provider-dismissed-response.html'" />
+				</div>
+
+
+				<div ng-show="{{ response.current.state === enum.responseReceiptStates.Pending.value }}">
+					<div ng-include="'/App/Templates/Provider/provider-pending-response.html'" />
+				</div>
+
+			</section>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,205 @@
+﻿<style>
+	table {
+		font-size: .75em;
+	}
+
+	.action {
+		width: 80px;
+	}
+
+	.tab-content {
+		padding-top: 10px;
+	}
+</style>
+
+<div class="widewrapper main">
+	<div class="container ob-container">
+		<div class="tabbable tabs-left">
+
+			<div class="row">
+				<ul class="nav nav-tabs col-md-7">
+					<li ng-class="{active: selectedTab == 'draft'}">
+						<a ng-click="selectedTab = 'draft'" href="">Draft ({{ draftPortfolios.length }})</a>
+					</li>
+
+					<li ng-class="{active: selectedTab == 'pending'}">
+						<a ng-click="selectedTab = 'pending'" href="">Pending ({{ pendingPortfolios.length }})</a>
+					</li>
+
+					<li ng-class="{active: selectedTab == 'completed'}">
+						<a ng-click="selectedTab = 'completed'" href="">Completed ({{ completedPortfolios.length }})</a>
+					</li>
+				</ul>
+
+				<div class="col-md-4 col-md-offset-1">
+				  <div class="input-group">
+					  <span class="input-group-btn">
+						<button class="btn btn-default" type="button" ng-click="searchText = ''"><i class="glyphicon glyphicon-trash" /></button>
+					  </span>
+					  <input type="text" class="form-control input-md" ng-model="searchText" />
+					</div>
+				</div>
+			</div>
+
+			<div class="tab-content row">
+				<div ng-switch="selectedTab">
+
+					<div ng-switch-when="draft">
+
+						<div ng-show="draftPortfolios.length === 0" class="alert alert-warning fade in">
+							<span>There are no draft requests at this time</span>
+						</div>
+
+						<table ng-show="draftPortfolios.length > 0" class="table table-condensed table-bordered table-striped">
+							<thead>
+								<tr>
+									<th class="action">Action</th>
+									<th class="">Location</th>
+									<th class="">Funeral</th>
+									<th class="">Created On</th>
+									<th class="">Modifed On</th>
+									<th class="">Drafted On</th>
+									<th class="">ID</th>
+								</tr>
+							</thead>
+
+							<tbody data-ng-repeat="portfolio in draftPortfolios | filter: {$: searchText}">
+								<tr>
+									<td>
+										<a class="btn btn-sm btn-tales-two" ng-href="#/consumer/{{ portfolio.id }}">Details</a>
+									</td>
+									<td>
+										<span ng-show="portfolio.preference.proximity.city && portfolio.preference.proximity.state">{{ portfolio.preference.proximity.city }}, {{ portfolio.preference.proximity.state }}</span>
+										<span ng-show="!portfolio.preference.proximity.city || !portfolio.preference.proximity.state">n/a</span>
+									</td>
+									<td>
+										<span ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.Scheduled.value">{{ portfolio.schedule.ceremonyDate | date:'MM/dd/yyyy' }}</span>
+										<span ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.PrePlan.value">Pre-Planning</span>
+										<span ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.None.value">n/a</span>
+									</td>
+									<td>
+										<span>{{ portfolio.created.on | date:'MM/dd/yyyy @ h:mma' }}</span>
+									</td>
+									<td>
+										<span>{{ portfolio.modified.on | date:'MM/dd/yyyy @ h:mma' }}</span>
+									</td>
+									<td>
+										<span>{{ portfolio.request.current.on | date:'MM/dd/yyyy @ h:mma' }}</span>
+									</td>
+									<td>
+										<span>{{ portfolio.id }}</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+
+
+					<div ng-switch-when="pending">
+
+						<div ng-show="pendingPortfolios.length === 0" class="alert alert-warning fade in">
+							<span>There are no pending requests at this time</span>
+						</div>
+
+						<table ng-show="pendingPortfolios.length > 0" class="table table-condensed table-bordered table-striped">
+							<thead>
+								<tr>
+									<th class="action">Action</th>
+									<th class="">Location</th>
+									<th class="">Funeral</th>
+									<th class="">Created On</th>
+									<th class="">Modifed On</th>
+									<th class="">Pending On</th>
+									<th class="">ID</th>
+								</tr>
+							</thead>
+
+							<tbody data-ng-repeat="portfolio in pendingPortfolios | filter: {$: searchText}">
+								<tr>
+									<td>
+										<a class="btn btn-sm btn-tales-two" ng-href="#/consumer/{{ portfolio.id }}">Details</a>
+									</td>
+									<td>
+										<span ng-show="portfolio.preference.proximity.city && portfolio.preference.proximity.state">{{ portfolio.preference.proximity.city }}, {{ portfolio.preference.proximity.state }}</span>
+										<span ng-show="!portfolio.preference.proximity.city || !portfolio.preference.proximity.state"></span>
+									</td>
+									<td>
+										<span ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.Scheduled.value">{{ portfolio.schedule.ceremonyDate | date:'MM/dd/yyyy' }}</span>
+										<span ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.PrePlan.value">Pre-Planning</span>
+										<span ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.None.value">n/a</span>
+									</td>
+									<td>
+										<span>{{ portfolio.created.on | date:'MM/dd/yyyy @ h:mma' }}</span>
+									</td>
+									<td>
+										<span>{{ portfolio.modified.on | date:'MM/dd/yyyy @ h:mma' }}</span>
+									</td>
+									<td>
+										<span>{{ portfolio.request.current.on | date:'MM/dd/yyyy @ h:mma' }}</span>
+									</td>
+									<td>
+										<span>{{ portfolio.id }}</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+
+
+					<div ng-switch-when="completed">
+
+						<div ng-show="completedPortfolios.length === 0" class="alert alert-warning fade in">
+							<span>There are no completed requests at this time</span>
+						</div>
+
+						<table ng-show="completedPortfolios.length > 0" class="table table-condensed table-bordered table-striped">
+							<thead>
+								<tr>
+									<th class="action">Action</th>
+									<th class="">Location</th>
+									<th class="">Funeral</th>
+									<th class="">Created On</th>
+									<th class="">Modifed On</th>
+									<th class="">Completed On</th>
+									<th class="">ID</th>
+								</tr>
+							</thead>
+
+							<tbody data-ng-repeat="portfolio in completedPortfolios | filter: {$: searchText}">
+								<tr>
+									<td>
+										<a class="btn btn-sm btn-tales-two" ng-href="#/consumer/{{ portfolio.id }}">Details</a>
+									</td>
+									<td>
+										<span ng-show="portfolio.preference.proximity.city && portfolio.preference.proximity.state">{{ portfolio.preference.proximity.city }}, {{ portfolio.preference.proximity.state }}</span>
+										<span ng-show="!portfolio.preference.proximity.city || !portfolio.preference.proximity.state"></span>
+									</td>
+									<td>
+										<span ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.Scheduled.value">{{ portfolio.schedule.ceremonyDate | date:'MM/dd/yyyy' }}</span>
+										<span ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.PrePlan.value">Pre-Planning</span>
+										<span ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.None.value">n/a</span>
+									</td>
+									<td>
+										<span>{{ portfolio.created.on | date:'MM/dd/yyyy @ h:mma' }}</span>
+									</td>
+									<td>
+										<span>{{ portfolio.modified.on | date:'MM/dd/yyyy @ h:mma' }}</span>
+									</td>
+									<td>
+										<span>{{ portfolio.request.current.on | date:'MM/dd/yyyy @ h:mma' }}</span>
+									</td>
+									<td>
+										<span>{{ portfolio.id }}</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

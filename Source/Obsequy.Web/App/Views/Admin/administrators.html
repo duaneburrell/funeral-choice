@@ -1,0 +1,61 @@
+﻿<style>
+	table {
+		font-size: .75em;
+	}
+
+	.action {
+		width: 160px;
+	}
+</style>
+
+<div class="widewrapper main">
+	<div class="container ob-container">
+
+		<div class="row">
+			<span class="col-md-3"><b>Administrator Accounts</b></span><a class="btn btn-sm btn-tales-two col-md-3" ng-href="#/administrator/">Create Administrator</a>
+		</div>
+
+		<br />
+
+		<div class="row">
+			<table ng-show="administratorMembers.length > 0" class="table table-condensed table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="action">Action</th>
+						<th class="">Name</th>
+						<th class="">Email</th>
+						<th class="">Status</th>
+						<th class="">Created</th>
+						<th class="">Modified</th>
+					</tr>
+				</thead>
+
+				<tbody data-ng-repeat="member in administratorMembers">
+					<tr>
+						<td>
+							<a class="btn btn-sm btn-tales-two" ng-href="#/administrator/{{ member.id }}">Edit</a>
+						</td>
+						<td>
+							<span>{{ member.fullName }}</span>
+						</td>
+						<td>
+							<span>{{ member.email }}</span>
+						</td>
+						<td>
+							<span account-status="{{ member.accountStatus }}"></span>
+						</td>
+						<td>
+                            <span>{{ member.created.on | date:'MM/dd/yyyy @ h:mma' }}</span>
+						</td>
+						<td>
+                            <span>{{ member.modified.on | date:'MM/dd/yyyy @ h:mma' }}</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<br />
+	</div>
+</div>
+

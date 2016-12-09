@@ -1,0 +1,24 @@
+﻿<div class="widewrapper main">
+	<div class="container ob-container">
+		<div ng-show="response">
+
+			<article>
+
+				<div ng-show="response.current.state === enum.responseReceiptStates.Pending.value">
+					<div ng-model="response" ng-include="'/App/Templates/Consumer/consumer-pending-response.html'" />
+				</div>
+
+				<div ng-show="response.current.state === enum.responseReceiptStates.Accepted.value">
+					<div ng-model="response" ng-include="'/App/Templates/Consumer/consumer-accepted-response.html'" />
+				</div>
+
+				<div ng-show="response.current.state === enum.responseReceiptStates.Rejected.value">
+					<div ng-model="response" ng-include="'/App/Templates/Consumer/consumer-rejected-response.html'" />
+				</div>
+
+			</article>
+
+		</div>
+	</div>
+</div>
+

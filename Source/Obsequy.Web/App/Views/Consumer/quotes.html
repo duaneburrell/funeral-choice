@@ -1,0 +1,153 @@
+﻿<style>
+</style>
+
+<div class="widewrapper main">
+	<div class="container ob-container">
+		<br />
+		<h4>Your Quotes for {{ portfolio.principal.fullName }}</h4>
+		<hr />
+
+		<div ng-hide="hasResponses">
+			<br />
+
+			<div class="alert alert-pending alert-block">
+				<strong style="margin-left: 15px;">Please wait</strong>, there are currently no bids sent in by our funeral providers.
+			</div>
+
+		</div>
+
+		<div ng-show="hasResponses">
+			<section class="four columns sidebar leftside">
+
+				<!-- Accepted Responses -->
+				<div ng-show="responsesAccepted.length !== 0">
+					<h4 class="subtitle"></h4>
+					<div class="clear"></div>
+
+					<div>
+						<div ng-repeat="responseAccepted in responsesAccepted">
+
+							<div class="alert alert-accepted col-md-5 col-md-offset-1">
+								<i class="glyphicon glyphicon-paperclip pull-left"></i>
+
+								<h4><strong class="span.glyphicon col-md-offset-1">Accepted Quote</strong></h4>
+								<hr class="hr_margins" />
+								<div class="row col-md-offset-1">
+									<ul style="font-size: 13px;">
+										<li class="arrow2"><span>Amount Quoted:</span><span> {{ responseAccepted.quote | currency:"$" }}</span></li>
+										<li class="arrow2"><span>Preferred Location: </span><span>{{ portfolio.preference.proximity.city }}, </span><span>{{ portfolio.preference.proximity.state }} </span></li>
+										<li class="arrow2"><span>Distance From You: </span><span>{{ responseAccepted.distance }} miles </span></li>
+										<li class="arrow2"><span>Funeral Business Established: </span><span business-established="{{ responsePending.profile.businessEstablished }}"></span></li>
+										<li class="arrow2"><span>Funeral Business Age: </span><span facility-age="{{ responsePending.profile.facilityAge }}"></span></li>
+										<li class="arrow2"><span>Funeral Business Style: </span><span facility-style="{{ responsePending.profile.facilityStyle }}"></span></li>
+										<li class="arrow2"><span>Funeral Director Experience: </span><span funeral-director-experience="{{ responsePending.profile.funeralDirectorExperience }}"></span></li>
+										<li class="arrow2"><span>Transportation Fleet Age: </span><span transportation-fleet-age="{{ responsePending.profile.transportationFleetAge }}"></span></li>
+
+									</ul>
+								</div>
+								<hr class="hr_margins" />
+								<a class="btn btn-default col-md-4 pull-right" style="margin-right: 10px;" ng-click="responseUrl(responseAccepted)">View Quote Details</a>
+
+								<div class="clearfix" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</section>
+
+			<!-- Pending Responses -->
+			<div ng-show="responsesPending.length !== 0">
+				<h4 class="subtitle" style="margin-bottom: 10px;"></h4>
+				<div class="clear"></div>
+
+				<div>
+					<div ng-repeat="responsePending in responsesPending">
+						<div class="alert alert-available col-md-5 col-md-offset-1">
+							<i class="glyphicon glyphicon-paperclip pull-left"></i>
+
+							<h4><strong class="span.glyphicon col-md-offset-1">Available Quote</strong></h4>
+							<hr class="hr_margins" />
+							<div class="row col-md-offset-1">
+								<ul style="font-size: 13px;">
+									<li class="arrow2"><span>Amount Quoted:</span><span> {{ responsePending.quote | currency:"$" }}</span></li>
+									<li class="arrow2"><span>Preferred Location: </span><span>{{ portfolio.preference.proximity.city }}, </span><span>{{ portfolio.preference.proximity.state }} </span></li>
+									<li class="arrow2"><span>Distance From You: </span><span>{{ responsePending.distance }} miles </span></li>
+									<li class="arrow2"><span>Funeral Business Established: </span><span business-established="{{ responsePending.profile.businessEstablished }}"></span></li>
+									<li class="arrow2"><span>Funeral Business Age: </span><span facility-age="{{ responsePending.profile.facilityAge }}"></span></li>
+									<li class="arrow2"><span>Funeral Business Style: </span><span facility-style="{{ responsePending.profile.facilityStyle }}"></span></li>
+									<li class="arrow2"><span>Funeral Director Experience: </span><span funeral-director-experience="{{ responsePending.profile.funeralDirectorExperience }}"></span></li>
+									<li class="arrow2"><span>Transportation Fleet Age: </span><span transportation-fleet-age="{{ responsePending.profile.transportationFleetAge }}"></span></li>
+								</ul>
+							</div>
+							<hr class="hr_margins" />
+							<a class="btn btn-default col-md-4 pull-right" style="margin-right: 10px;" ng-click="responseUrl(responsePending)">View Quote Details</a>
+
+							<div class="clearfix" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Rejected Responses -->
+		<div ng-show="responsesRejected.length !== 0">
+
+			<h4 class="subtitle"></h4>
+			<div class="clear"></div>
+
+			<div>
+				<div ng-repeat="responseRejected in responsesRejected">
+					<div class="alert alert-rejected col-md-5 col-md-offset-1">
+						<i class="glyphicon glyphicon-paperclip pull-left"></i>
+
+						<h4><strong class="span.glyphicon col-md-offset-1">Rejected Quote</strong></h4>
+						<hr class="hr_margins" />
+						<div class="row col-md-offset-1">
+							<ul style="font-size: 13px;">
+								<li class="arrow2"><span>Amount Quoted:</span><span> {{ responseRejected.quote | currency:"$" }}</span></li>
+								<li class="arrow2"><span>Preferred Location: </span><span>{{ portfolio.preference.proximity.city }}, </span><span>{{ portfolio.preference.proximity.state }} </span></li>
+								<li class="arrow2"><span>Distance From You: </span><span>{{ responseRejected.distance }} miles </span></li>
+								<li class="arrow2"><span>Funeral Business Established: </span><span business-established="{{ responsePending.profile.businessEstablished }}"></span></li>
+								<li class="arrow2"><span>Funeral Business Age: </span><span facility-age="{{ responsePending.profile.facilityAge }}"></span></li>
+								<li class="arrow2"><span>Funeral Business Style: </span><span facility-style="{{ responsePending.profile.facilityStyle }}"></span></li>
+								<li class="arrow2"><span>Funeral Director Experience: </span><span funeral-director-experience="{{ responsePending.profile.funeralDirectorExperience }}"></span></li>
+								<li class="arrow2"><span>Transportation Fleet Age: </span><span transportation-fleet-age="{{ responsePending.profile.transportationFleetAge }}"></span></li>
+
+							</ul>
+						</div>
+						<hr class="hr_margins" />
+
+						<a class="btn btn-default col-md-4 pull-right" style="margin-right: 10px;" ng-click="responseUrl(responseRejected)">View Quote Details</a>
+
+						<div class="clearfix" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<section class="eleven columns unauth">
+	<div ng-show="response">
+
+		<article>
+
+			<div ng-show="response.current.state === enum.responseReceiptStates.Pending.value">
+				<div ng-model="response" ng-include="'/App/Templates/Consumer/consumer-pending-response.html'" />
+			</div>
+
+			<div ng-show="response.current.state === enum.responseReceiptStates.Accepted.value">
+				<div ng-model="response" ng-include="'/App/Templates/Consumer/consumer-accepted-response.html'" />
+			</div>
+
+			<div ng-show="response.current.state === enum.responseReceiptStates.Rejected.value">
+				<div ng-model="response" ng-include="'/App/Templates/Consumer/consumer-rejected-response.html'" />
+			</div>
+
+		</article>
+
+	</div>
+</section>
+
+<hr class="vertical-space2">

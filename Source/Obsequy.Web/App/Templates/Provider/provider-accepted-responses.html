@@ -1,0 +1,29 @@
+﻿
+<section>
+	
+
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="">Preferred Location</th>
+				<th class="">Request Accepted</th>
+                <th class="">Wake Date</th>
+                <th class="">Ceremony Date</th>
+                <th class="">Quoted</th>
+				<th class=""></th>
+			</tr>
+		</thead>
+		<tbody ng-repeat="response in data.responsesAccepted">
+			<tr>
+				<td><span>{{ response.preference.proximity.city }}</span>, <span>{{ response.preference.proximity.state }}</span></td>
+				<td><span>{{ (response.pending.on | date : date : format) || "Not specified" }}</span></td>
+				<td><span>{{ (response.schedule.wakeDate | date : date : format) || "Not specified" }}</span></td>
+                <td><span>{{ (response.schedule.ceremonyDate | date : date : format) || "Not specified" }}</span></td>
+                <td><span>{{ response.quote | currency:"$" }}</span></td>
+				<td>
+					<a ng-href="#/quote/{{ response.id }}">View</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</section>

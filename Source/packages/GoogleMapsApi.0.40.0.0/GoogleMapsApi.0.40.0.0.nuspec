@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>GoogleMapsApi</id>
+    <version>0.40.0.0</version>
+    <title>Google Maps Web Services API wrapper for .NET</title>
+    <authors>Maxim Novak</authors>
+    <owners>Maxim Novak</owners>
+    <licenseUrl>https://github.com/maximn/google-maps/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/maximn/google-maps/</projectUrl>
+    <iconUrl>http://code.google.com/p/google-maps/logo?cct=1335784301</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This library wraps Google maps API.
+
+You can easily query Google maps for Geocoding, Directions, Elevation, and Places.
+
+You can easily show the results on a Static Google Map!
+
+This Library is well documented and easy to use.</description>
+    <summary>Google Maps Web Services API wrapper for .NET
+* Geocoding, Directions, Elevation, and Places
+* Static maps</summary>
+    <releaseNotes>- ** BREAKING CHANGE ** - removed obsolete classes
+- API key added to all request types
+- IsSSL by default (required to use APIKey)
+- working with google's new URIs for maps webservices</releaseNotes>
+    <language>en-US</language>
+    <tags>Map Geo Places Elevation Geocode Directions Maps</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="" />
+      <frameworkAssembly assemblyName="System" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Data" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Data.DataSetExtensions" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Runtime.Serialization" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Xml.Linq" targetFramework="" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

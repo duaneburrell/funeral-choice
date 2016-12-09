@@ -1,0 +1,303 @@
+﻿
+
+
+<div class="widewrapper main">
+    <div class="container ob-container">
+
+		<div ng-show="data.portfolio.accountStatus === enum.accountStatus.None.value">
+            <div class="jumbotron">
+                <h2><span class="glyphicon glyphicon-warning-sign"></span>Please <a href="#/portfolio">complete</a> your account profile to being servicing families.</h2>
+                <h3>Once you <a href="#/portfolio">complete</a> your profile, it will be promplty reviewed by our staff.</h3>
+                <h4>Please send any inquiries regarding your account status to: <span class="caption"><a href="mailto:support@funeral-choice.com">support@funeral-choice.com.</a></span></h4>
+            </div>
+
+			<a class="btn btn-tales-one btn-md col-md-8 col-md-offset-2" ng-href="#/portfolio">Complete Profile</a>
+        </div>
+
+        <div ng-show="data.portfolio.accountStatus === enum.accountStatus.Pending.value">
+            <div class="jumbotron">
+                <h2><span class="glyphicon glyphicon-warning-sign"></span>Your account is currently under review and pending approval.</h2>
+                <h3>The account was submitted for approval <span time-elapsed="{{ data.portfolio.created.on }}"></span> ago and will be reviewed by our staff.</h3>
+                <h4>Please send any inquiries regarding your account status to: <span class="caption"><a href="mailto:support@funeral-choice.com">support@funeral-choice.com.</a></span></h4>
+            </div>
+        </div>
+
+        <div ng-show="data.portfolio.accountStatus === enum.accountStatus.Rejected.value">
+            <div class="jumbotron">
+                <h2><span class="glyphicon glyphicon-warning-sign"></span>Your account creation request has been rejected.</h2>
+                <h3>The account was submitted for approval <span time-elapsed="{{ data.portfolio.created.on }}"></span> ago and was reviewed by our staff.</h3>
+                <h4>Please send any inquiries regarding your account status to: <span class="caption"><a href="mailto:support@funeral-choice.com">support@funeral-choice.com.</a></span></h4>
+            </div>
+        </div>
+
+        <div ng-show="data.portfolio.accountStatus === enum.accountStatus.Suspended.value">
+            <div class="jumbotron">
+                <h2><span class="glyphicon glyphicon-warning-sign"></span>Your account has been suspended.</h2>
+                <h4>Please send any inquiries regarding your account status to: <span class="caption"><a href="mailto:support@funeral-choice.com">support@funeral-choice.com.</a></span></h4>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="col-md-12" ng-show="data.portfolio.accountStatus === enum.accountStatus.Active.value">
+
+            <div class="col-md-4">
+                <div class="row">
+                    <h4 class="notification">Activity in the past 24 hours</h4>
+                    <hr class="hr_margins" />
+                    <div ng-show="data.responsesLast24Hours.length > 0" ng-repeat="response in data.responsesLast24Hours">
+
+                        <div ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Available.value">
+                            <div class="alert alert-available notification available-color">
+                                <strong class="available-text col-md-offset-1">Available since </strong><strong class="available-text" time-ago="{{ response.request.current.on }}" />
+
+                                <i class="glyphicon glyphicon-star pull-right"></i>
+
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}} miles ({{ response.preference.proximity.city }})</strong>
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+
+                        <div ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Accepted.value">
+
+                            <div class="alert alert-accepted notification accepted-color">
+                                <strong class="accepted-text col-md-offset-1">Accepted </strong><strong class="accepted-text" time-ago="{{ response.current.on }}" />
+
+                                <i class="glyphicon glyphicon-thumbs-up pull-right"></i>
+
+                                <br />
+                                <span class="decedent-text col-md-offset-1">Decedent: </span><strong class="decedent-text">{{response.principal.fullName}}</strong>
+                                <br />
+                                <span class="quote-text col-md-offset-1">Quote: </span><strong class="quote-text">{{response.quote | currency:"$" }}</strong>
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}} miles ({{ response.preference.proximity.city }})</strong>
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+
+                        <div "" ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Pending.value">
+                            <div class="alert alert-pending notification pending-color">
+                                <strong class="pending-text col-md-offset-1">Submitted </strong><strong class="pending-text" time-ago="{{ response.pending.on }}" />
+
+                                <i class="glyphicon glyphicon-hand-right pull-right"></i>
+
+                                <br />
+                                <span class="quote-text col-md-offset-1">Quote: </span><strong class="quote-text">{{response.quote | currency:"$" }}</strong>
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}} miles ({{ response.preference.proximity.city }})</strong>
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+
+                        <div "" ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Rejected.value">
+                            <div class="alert alert-rejected notification rejected-color">
+                                <strong class="rejected-text col-md-offset-1">Rejected </strong><strong class="rejected-text" time-ago="{{ response.current.on }}" />
+
+                                <i class="glyphicon glyphicon-thumbs-down pull-right"></i>
+
+                                <br />
+                                <span class="quote-text col-md-offset-1">Quote: </span><strong class="quote-text">{{response.quote | currency:"$" }}</strong>
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}}</strong>
+
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+
+                        <div "" ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Dismissed.value">
+                            <div class="alert alert-dismissed notification dismissed-color">
+                                <strong class="dismissed-text col-md-offset-1">Dismissed </strong><strong class="dismissed-text" time-ago="{{ response.current.on }}" />
+
+                                <i class="glyphicon glyphicon-thumbs-down pull-right"></i>
+
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}}</strong>
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-show="data.responsesLast24Hours.length === 0">
+                        <div class="alert alert-warning notification">
+                            <span class="notification-text">No activity in the past 24 hours</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="row">
+                    <h4 class="notification">Activity in the past 7 days</h4>
+                    <hr class="hr_margins" />
+                    <div ng-show="data.responsesLast7Days.length > 0" ng-repeat="response in data.responsesLast7Days">
+
+                        <div "" ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Available.value">
+
+                            <div class="alert alert-available notification available-color" >
+                                <strong class="available-text col-md-offset-1">Available since </strong><strong class="available-text" time-ago="{{ response.request.current.on }}" />
+
+                                <i class="glyphicon glyphicon-star pull-right"></i>
+
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}} miles ({{ response.preference.proximity.city }})</strong>
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+
+                        <div "" ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Accepted.value">
+                            <div class="alert alert-accepted notification accepted-color" >
+                                <strong class="accepted-text col-md-offset-1">Accepted </strong><strong class="accepted-text" time-ago="{{ response.current.on }}" />
+                                <i class="glyphicon glyphicon-thumbs-up pull-right"></i>
+
+                                <br />
+                                <span class="decedent-text col-md-offset-1">Decedent: </span><strong class="decedent-text">{{response.principal.fullName}}</strong>
+                                <br />
+                                <span class="quote-text col-md-offset-1">Quote: </span><strong class="quote-text">{{response.quote | currency:"$" }}</strong>
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}} miles ({{ response.preference.proximity.city }})</strong>
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+
+                        <div "" ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Pending.value">
+                            <div class="alert alert-pending notification pending-color" >
+                                <strong class="pending-text col-md-offset-1">Submitted </strong><strong class="pending-text" time-ago="{{ response.pending.on }}" />
+                                <i class="glyphicon glyphicon-hand-right pull-right"></i>
+
+                                <br />
+                                <span class="quote-text col-md-offset-1">Quote: </span><strong class="quote-text">{{response.quote | currency:"$" }}</strong>
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}} miles ({{ response.preference.proximity.city }})</strong>
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+
+                        <div "" ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Rejected.value">
+                            <div class="alert alert-rejected notification rejected-color" >
+                                <i class="glyphicon glyphicon-thumbs-down pull-right"></i>
+
+                                <strong class="rejected-text col-md-offset-1">Rejected </strong><strong class="rejected-text" time-ago="{{ response.current.on }}" />
+                                <br />
+                                <span class="quote-text col-md-offset-1">Quote: </span><strong class="quote-text">{{response.quote | currency:"$" }}</strong>
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}}</strong>
+
+
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+
+                        <div "" ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Dismissed.value">
+                            <div class="alert alert-dismissed notification dismissed-color" >
+                                <strong class="dismissed-text col-md-offset-1">Dismissed </strong><strong class="dismissed-text" time-ago="{{ response.current.on }}" />
+
+                                <i class="glyphicon glyphicon-thumbs-down pull-right"></i>
+
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}}</strong>
+
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-show="data.responsesLast7Days.length === 0">
+                        <div class="alert alert-warning notification">
+                            <span class="notification-text">No activity in the past 7 days</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="row">
+                    <h4 class="notification">Activity in the past 30 days</h4>
+                    <hr class="hr_margins" />
+
+                    <div ng-show="data.responsesLast30Days.length > 0" ng-repeat="response in data.responsesLast30Days">
+
+                        <div "" ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Available.value">
+                            <div class="alert alert-available notification available-color" >
+                                <strong class="available-text col-md-offset-1">Available since </strong><strong class="available-text" time-ago="{{ response.request.current.on }}" />
+
+                                <i class="glyphicon glyphicon-star pull-right"></i>
+
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}} miles ({{ response.preference.proximity.city }})</strong>
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+
+                        <div "" ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Accepted.value">
+                            <div class="alert alert-accepted notification accepted-color" >
+                                <strong class="accepted-text col-md-offset-1">Accepted </strong><strong class="accepted-text" time-ago="{{ response.current.on }}" />
+
+                                <i class="glyphicon glyphicon-thumbs-up pull-right"></i>
+
+                                <br />
+                                <span class="decedent-text col-md-offset-1">Decedent: </span><strong class="decedent-text">{{response.principal.fullName}}</strong>
+                                <br />
+                                <span class="quote-text col-md-offset-1">Quote: </span><strong class="quote-text">{{response.quote | currency:"$" }}</strong>
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}} miles ({{ response.preference.proximity.city }})</strong>
+
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+
+                        <div "" ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Pending.value">
+                            <div class="alert alert-pending notification pending-color" >
+                                <strong class="pending-text col-md-offset-1">Submitted </strong><strong class="pending-text" time-ago="{{ response.pending.on }}" />
+
+                                <i class="glyphicon glyphicon-hand-right pull-right"></i>
+
+                                <br />
+                                <span class="quote-text col-md-offset-1">Quote: </span><strong class="quote-text">{{response.quote | currency:"$" }}</strong>
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}} miles ({{ response.preference.proximity.city }})</strong>
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+
+                        <div "" ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Rejected.value">
+                            <div class="alert alert-rejected notification rejected-color" >
+                                <strong class="rejected-text col-md-offset-1">Rejected </strong><strong class="rejected-text" time-ago="{{ response.current.on }}" />
+
+                                <i class="glyphicon glyphicon-thumbs-down pull-right"></i>
+
+                                <br />
+                                <span class="quote-text col-md-offset-1">Quote: </span><strong class="quote-text">{{response.quote | currency:"$" }}</strong>
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}}</strong>
+
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+
+                        <div "" ng-click="go('/quote/' + response.id)" ng-show="response.current.state === enum.responseReceiptStates.Dismissed.value">
+                            <div class="alert alert-dismissed notification dismissed-color" >
+                                <strong class="dismissed-text col-md-offset-1">Dismissed </strong><strong class="dismissed-text" time-ago="{{ response.current.on }}" />
+
+                                <i class="glyphicon glyphicon-thumbs-down pull-right"></i>
+
+                                <br />
+                                <span class="distance-text col-md-offset-1">Distance: </span><strong class="city-text">{{response.distance}}</strong>
+
+                                <div class="clearfix" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-show="data.responsesLast30Days.length === 0">
+                        <div class="alert alert-warning notification">
+                            <span class="notification-text">No activity in the past 30 days</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

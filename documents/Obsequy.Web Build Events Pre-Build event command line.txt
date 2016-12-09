@@ -1,0 +1,47 @@
+echo "$(ProjectDir)Content\less\mixins.less"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\less\mixins.less"  "$(ProjectDir)Content\less\mixins.min.css"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\less\mixins.less"  "$(ProjectDir)Content\less\mixins.css"
+
+echo "$(ProjectDir)Content\less\bootstrap.less"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\less\bootstrap.less"
+
+echo "$(ProjectDir)Content\less\variables.less"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" -m  "$(ProjectDir)Content\less\variables.less" "$(ProjectDir)Content\less\variables.min.css"
+
+echo "$(ProjectDir)Content\less\responsive-utilities.less"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" -m  "$(ProjectDir)Content\less\responsive-utilities.less" "$(ProjectDir)Content\less\responsive-utilities.css"
+
+echo "$(ProjectDir)Content\less\responsive-utilities.less"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" -m  "$(ProjectDir)Content\less\responsive-utilities.less" "$(ProjectDir)Content\less\responsive-utilities.min.css"
+
+echo "$(ProjectDir)Content\site-less\carousel.less"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site-less\carousel.less"  "$(ProjectDir)Content\site-less\carousel.css"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site-less\carousel.less"  "$(ProjectDir)Content\site-less\carousel.min.css"
+
+echo "$(ProjectDir)Content\site-less\layout.less"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site-less\layout.less"  "$(ProjectDir)Content\site-less\layout.css"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site-less\layout.less"  "$(ProjectDir)Content\site-less\layout.min.css"
+
+echo "$(ProjectDir)Content\site-less\marketing.less"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site-less\marketing.less"  "$(ProjectDir)Content\site-less\marketing.css"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site-less\marketing.less"  "$(ProjectDir)Content\site-less\marketing.min.css"
+
+echo "$(ProjectDir)Content\site.less"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site.less"  "$(ProjectDir)Content\site.css"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site.less"  "$(ProjectDir)Content\site.min.css"
+
+echo "$(ProjectDir)Content\site-less\consumer.less
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site-less\consumer.less"  "$(ProjectDir)Content\site-less\consumer.css"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site-less\consumer.less"  "$(ProjectDir)Content\site-less\consumer.min.css"
+
+echo "$(ProjectDir)Content\site-less\provider.less
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site-less\provider.less"  "$(ProjectDir)Content\site-less\provider.css"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site-less\provider.less"  "$(ProjectDir)Content\site-less\provider.min.css"
+
+echo "$(ProjectDir)Content\site-less\unauth.less
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site-less\unauth.less"  "$(ProjectDir)Content\site-less\unauth.css"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site-less\unauth.less"  "$(ProjectDir)Content\site-less\unauth.min.css"
+
+echo "$(ProjectDir)Content\site-less\navbar.less
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site-less\navbar.less"  "$(ProjectDir)Content\site-less\navbar.css"
+"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)Content\site-less\navbar.less"  "$(ProjectDir)Content\site-less\navbar.min.css"

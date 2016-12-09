@@ -1,0 +1,37 @@
+﻿<section>
+	<style>
+		textarea {
+			resize: none;
+		}
+	</style>
+
+	<div class="consumer">
+
+		<section class="container page-content">
+
+			<div class="sixteen columns">
+				<h4 class="subtitle">Your Account Information</h4>
+				<hr class="vertical-space">
+			</div>
+		</section>
+
+
+		<div style="margin-top: 10px;">
+
+			<div class="one_half">
+				<div style="margin-left: 25px;">
+
+					<small>FIRST NAME</small>
+					<input type="text" tabindex="2" ng-model="member.firstName" />
+					<small>LAST NAME</small>
+					<input type="text" tabindex="3" ng-model="member.lastName" />
+				</div>
+			</div>
+
+			<h4 class="subtitle"></h4>
+			<button class="skyblue" ng-click="onSubmit()">Save</button>
+			<button class="darkgray" ng-click="onCancel()">Cancel</button>
+		</div>
+	</div>
+</section>
+

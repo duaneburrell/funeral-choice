@@ -1,0 +1,348 @@
+﻿
+<style>
+	.section-header {
+		font-size: 1.4em;
+		font-weight: bold;
+	}
+
+	.no-well {
+		margin-left: 2px;
+		margin-bottom: 10px;
+	}
+
+	.section-description {
+		font-size: .8em;
+		margin-left: 10px;
+	}
+
+	.input-label {
+		font-size: .9em;
+	}
+</style>
+
+<div class="widewrapper main">
+	<div class="container">
+
+		<div class="row" ng-show="profilerPrincipal.isVisible" style="margin-top:10px;">
+			<div class="col-md-4">
+				<select class="form-control" ng-model="profilerPrincipal.key" ng-options="i for i in profilerPrincipal.keys" ng-change="profilerPrincipal.onKeyChanged()" ng-show="profilerPrincipal.isVisible"></select>
+			</div>
+			<div class="col-md-4">
+				<select class="form-control" ng-model="profilerPreference.key" ng-options="i for i in profilerPreference.keys" ng-change="profilerPreference.onKeyChanged()" ng-show="profilerPreference.isVisible"></select>
+			</div>
+			<div class="col-md-4">
+				<select class="form-control" ng-model="profilerSchedule.key" ng-options="i for i in profilerSchedule.keys" ng-change="profilerSchedule.onKeyChanged()" ng-show="profilerSchedule.isVisible"></select>
+			</div>
+		</div>
+
+		<br />
+
+		<!-- principal -->
+		<div class="row no-well">
+			<div class="col-md-12">
+				<div class="row">
+					<span class="section-header">Decedent</span>
+					<span class="section-description">(Who you are making arrangements for)</span>
+					<hr>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<span class="input-label">First Name </span><span class="validation-error pull-right" invalid-property property="principal.firstName"></span>
+							<input class="form-control" ng-model="portfolio.principal.firstName">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<span class="input-label">Last Name </span><span class="validation-error pull-right" invalid-property property="principal.lastName"></span>
+							<input class="form-control" ng-model="portfolio.principal.lastName">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" ng-show="isNew">
+			<a class="btn btn-tales-one btn-md col-md-8" ng-click="onCreatePortfolio()">Next</a>
+			<a class="btn btn-default btn-md col-md-3 col-md-offset-1" href="#/">Cancel</a>
+		</div>
+
+		<!-- preferences -->
+		<div class="row" ng-hide="isNew">
+			<div class="col-md-12">
+
+				<!-- location -->
+				<div class="row well well-sm">
+					<span class="section-header">Location</span>
+					<span class="section-description">(Where you would like the service to take place)</span>
+					<hr>
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<span>City </span><span class="validation-error pull-right" invalid-property property="preference.proximity.city"></span>
+							<input class="form-control" ng-model="portfolio.preference.proximity.city">
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<span>State </span><span class="validation-error pull-right" invalid-property property="preference.proximity.state"></span>
+							<select class="form-control" ng-model="portfolio.preference.proximity.state" ng-options="item.text as item.text for item in enum.statesLimited"></select>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<span>Maxium Distance Away </span><span class="validation-error pull-right" invalid-property property="preference.maxDistance"></span>
+							<select class="form-control" ng-model="portfolio.preference.maxDistance" ng-options="item.value as item.text for item in enum.maximumDistances"></select>
+						</div>
+					</div>
+				</div>
+
+				<!-- services -->
+				<div class="row no-well">
+					<span class="section-header">Services</span>
+					<span class="section-description">(tell us some specifics about the service you'd like to have)</span>
+					<hr>
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<span class="validation-error" invalid-property property="preference.funeralType"></span>
+							<div request-set-preference ng-if="onProfiler" style="font-size:14px;" description="Funeral" explanation="Please choose one of the following:" key="funeralType" enum-key="funeralTypes" input-type="radio"></div>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<span class="validation-error" invalid-property property="preference.internmentType"></span>
+							<div request-set-preference ng-if="onProfiler" style="font-size:14px;" description="Internment" explanation="Please choose one of the following:" key="internmentType" enum-key="internmentTypes" input-type="radio"></div>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<span class="validation-error" invalid-property property="preference.wakeType"></span>
+							<div request-set-preference ng-if="onProfiler" style="font-size:14px;" description="Wake" explanation="Visitation is open to:" key="wakeType" enum-key="wakeTypes" input-type="radio"></div>
+						</div>
+					</div>
+
+					<div class="clearfix" />
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<span class="validation-error" invalid-property property="preference.religionType"></span>
+							<div request-set-preference ng-if="onProfiler" description="Religion" explanation="Please choose your religion:" key="religionType" enum-key="religionTypes" input-type="combo"></div>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<span class="validation-error" invalid-property property="preference.expectedAttendanceType"></span>
+							<div request-set-preference ng-if="onProfiler" description="Expected Attendance" explanation="Please choose your expected attendance:" key="expectedAttendanceType" enum-key="expectedAttendanceTypes" input-type="combo"></div>
+						</div>
+					</div>
+
+					<div class="clearfix" />
+
+					<div class="col-md-8">
+						<div class="form-group">
+							<medium>Service Preferences</medium>
+							<span class="validation-error" invalid-property property="preference.servicePreferences"></span>
+							<small>Please let us know if you have specific customs you would like observed: </small>
+							<textarea class="form-control" rows="2" ng-model="portfolio.preference.servicePreferences" />
+						</div>
+					</div>
+
+				</div>
+
+				<!-- caskets / urns -->
+				<div class="row well well-sm">
+					<span class="section-header">Caskets</span>
+					<hr />
+
+					<span class="validation-error" invalid-property property="preference.remainsChoiceType"></span>
+
+					<div class="clearfix" />
+
+					<div class="col-md-3">
+						<input type="radio" name="casket-group" class="input-md" ng-if="onProfiler" ng-model="portfolio.preference.remainsChoiceType" ng-value="enum.remainsChoiceTypes.CasketRequired.value"><span style="padding-left:10px;">I need a casket</span>
+					</div>
+
+					<div class="col-md-3">
+						<input type="radio" name="casket-group" class="input-md" ng-if="onProfiler" ng-model="portfolio.preference.remainsChoiceType" ng-value="enum.remainsChoiceTypes.Unnecessary.value"><span style="padding-left:10px;">I do not need a casket</span>
+					</div>
+
+					<div class="clearfix" />
+
+					<div ng-show="portfolio.preference.remainsChoiceType === enum.remainsChoiceTypes.CasketRequired.value">
+						<br />
+						<small class="col-md-12">Caskets are typically available in Metal and Wood. The most common metal in caskets is basic Steel. Stainless Steel, Copper, and Bronze are also available at a higher price. Metals are stated in '”gages” from 16 to 22. 18-gage (thickness of a car fender) and 20-gage (thickness of a stop sign) are the most popular, while 16-gage is usually the choice for brushed finishes. The higher gage, the lower the price. Copper and Bronze caskets are described as '32-ounce' or '34-ounce', the weight of one square foot. Bronze is the most expensive. Wood units do not come with a 'seal' or rubber 'gasket' and can't be stated as “protective”. Softer woods like pine and aspen are less expensive. Hardwoods typically are higher priced.</small>
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<span class="validation-error" invalid-property property="preference.casketMaterialType"></span>
+								<div request-set-preference ng-if="onProfiler" description="Casket Material" explanation="Please choose a material:" key="casketMaterialType" enum-key="casketMaterialTypes" input-type="combo"></div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<span class="validation-error" invalid-property property="preference.casketSizeType"></span>
+								<div request-set-preference ng-if="onProfiler" description="Casket Size" explanation="Please choose a size:" key="casketSizeType" enum-key="casketSizeTypes" input-type="combo"></div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<span class="validation-error" invalid-property property="preference.casketColorType"></span>
+								<div request-set-preference ng-if="onProfiler" description="Casket Color" explanation="Please choose a color:" key="casketColorType" enum-key="casketColorTypes" input-type="combo"></div>
+							</div>
+						</div>
+
+						<div class="clearfix" />
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<span class="validation-error" invalid-property property="preference.casketManufacturerType"></span>
+								<div request-set-preference ng-if="onProfiler" description="Casket Manufacturer" explanation="Please choose a manufacturer:" key="casketManufacturerType" enum-key="casketManufacturerTypes" input-type="combo"></div>
+							</div>
+						</div>
+
+						<div class="clearfix"></div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<span class="validation-error" invalid-property property="preference.burialContainerType"></span>
+								<div request-set-preference ng-if="onProfiler" description="Burial Container" explanation="Many cemeteries across the United States and the world have policies requiring graves be installed with a burial vault. The main purpose of a vault is to keep the ground from caving in around a casket as its condition changes over time. However, there does not seem to be any law in which cemeteries are specifically required to install burial vaults in their graves. So if you are not sure you want to include one or if it’s required, please indicate below and discuss with the funeral director." key="burialContainerType" enum-key="burialContainerTypes" input-type="radio"></div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- transportation -->
+				<div class="row no-well">
+					<span class="section-header">Transportation</span>
+					<span class="section-description">(Please specify if you need additional transportation for family members)</span>
+					<hr>
+
+					<span class="validation-error" invalid-property property="preference.transportationChoiceType"></span>
+					<div class="clearfix" />
+
+					<div class="col-md-4">
+						<input type="radio" name="transportation-group" class="input-md" ng-if="onProfiler" ng-model="portfolio.preference.transportationChoiceType" ng-value="enum.transportationChoiceTypes.Required.value"><span style="padding-left:10px;">I need additional transportation</span>
+					</div>
+
+					<div class="col-md-4">
+						<input type="radio" name="transportation-group" class="input-md" ng-if="onProfiler" ng-model="portfolio.preference.transportationChoiceType" ng-value="enum.transportationChoiceTypes.Unnecessary.value"><span style="padding-left:10px;">I do not need additional transportation</span>
+					</div>
+
+					<div class="clearfix" />
+
+					<div ng-show="portfolio.preference.transportationChoiceType === enum.transportationChoiceTypes.Required.value">
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<span class="validation-error" invalid-property property="preference.transportationOfFamilyType"></span>
+								<div request-set-preference ng-if="onProfiler" description="Additional Transportation" explanation="How many people need transportation:" key="transportationOfFamilyType" enum-key="transportationOfFamilyTypes" input-type="combo"></div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- flowers -->
+				<div class="row well well-sm">
+					<span class="section-header">Flowers</span>
+					<span class="section-description">(Please specify the style of casket spray as well as the primary, secondary, and accent flowers)</span>
+					<hr>
+
+					<div class="col-md-3">
+						<div class="form-group">
+							<span class="validation-error" invalid-property property="preference.primaryFlowerType"></span>
+							<div request-set-preference ng-if="onProfiler" style="font-size:14px;" description="Primary Flowers" explanation="" key="primaryFlowerType" enum-key="flowerTypes" input-type="radio"></div>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="form-group">
+							<span class="validation-error" invalid-property property="preference.secondaryFlowerType"></span>
+							<div request-set-preference ng-if="onProfiler" style="font-size:14px;" description="Secondary Flowers" explanation="" key="secondaryFlowerType" enum-key="flowerTypes" input-type="radio"></div>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="form-group">
+							<span class="validation-error" invalid-property property="preference.accentFlowerType"></span>
+							<div request-set-preference ng-if="onProfiler" style="font-size:14px;" description="Accent Flowers" explanation="" key="accentFlowerType" enum-key="flowerTypes" input-type="radio"></div>
+						</div>
+					</div>
+
+					<div class="col-md-3" ng-show="portfolio.preference.remainsChoiceType === enum.remainsChoiceTypes.CasketRequired.value">
+						<div class="form-group">
+							<span class="validation-error" invalid-property property="preference.flowerSprayType"></span>
+							<div request-set-preference ng-if="onProfiler" style="font-size:14px;" description="Style of casket flower spray" explanation="" key="flowerSprayType" enum-key="flowerSprayTypes" input-type="radio"></div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- schedule -->
+		<div class="row no-well" ng-hide="isNew">
+			<div class="col-md-12">
+				<div class="row">
+					<span class="section-header">Schedule</span>
+					<span class="section-description"></span>
+					<hr>
+				</div>
+
+				<span class="validation-error" invalid-property property="schedule.scheduleChoiceType"></span>
+
+				<div class="clearfix" />
+
+				<div class="col-md-4">
+					<input type="radio" name="schedule-group" class="input-md" ng-model="portfolio.schedule.scheduleChoiceType" ng-value="enum.scheduleChoiceTypes.PrePlan.value"><span style="padding-left:10px;"><b>Pre-Planning</b>: I do not know when I would like the funeral to take place</span>
+				</div>
+
+				<div class="col-md-4">
+					<input type="radio" name="schedule-group" class="input-md" ng-model="portfolio.schedule.scheduleChoiceType" ng-value="enum.scheduleChoiceTypes.Scheduled.value"><span style="padding-left:10px;"><b>Deceased</b>: I know when I would like the funeral to take place</span>
+				</div>
+
+				<div class="clearfix" />
+
+				<div ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.Scheduled.value">
+					<br />
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<span class="input-label">Date of Wake </span><span class="validation-error pull-right" invalid-property property="schedule.wakeDate"></span>
+							<input id="wakeDate" class="form-control" ng-model="wakeDate" type="date">
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<span class="input-label">Date of Funeral </span><span class="validation-error pull-right" invalid-property property="schedule.ceremonyDate"></span>
+							<input class="form-control" ng-model="ceremonyDate" type="date">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix" />
+
+		<div class="row" ng-show="!isNew && portfolio.canSave">
+			<div class="col-md-8 col-md-offset-2">
+				<span class="validation-error" invalid-property property="id"></span>
+			</div>
+			<div class="clearfix" />
+			<a class="btn btn-tales-one btn-md col-md-8 col-md-offset-2" ng-click="onUpdatePortfolio()">Save and then Review</a>
+		</div>
+
+		<div class="clearfix" />
+		<br />
+	</div>
+</div>

@@ -1,0 +1,213 @@
+﻿
+<div>
+	<div class="preferences-agreements-template-section-header">LOCATION</div>
+	<table class="table table-bordered table-striped preferences-agreements-template-item">
+		<thead>
+			<tr>
+				<th class="preferences-agreements-tr-heading-description">Description</th>
+				<th class="preferences-agreements-tr-heading-selection">Selection</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr ng-show="portfolio && portfolio.preference.proximity.city && portfolio.preference.proximity.state">
+				<td>Preferred Location</td>
+				<td>{{ portfolio.preference.proximity.city }}, {{ portfolio.preference.proximity.state }}</td>
+			</tr>
+			<tr ng-show="request && request.preference.proximity.city && request.preference.proximity.state">
+				<td>Preferred Location</td>
+				<td>{{ request.preference.proximity.city }}, {{ request.preference.proximity.state }}</td>
+			</tr>
+
+			<tr ng-show="portfolio && portfolio.preference.maxDistance">
+				<td>Maximum Distance Away</td>
+				<td>{{ portfolio.preference.maxDistance }} miles</td>
+			</tr>
+			<tr ng-show="request && request.preference.maxDistance">
+				<td>Maximum Distance Away</td>
+				<td>{{ request.preference.maxDistance }} miles</td>
+			</tr>
+
+		</tbody>
+	</table>
+	<div ng-show="!portfolio.preference.anyServiceSelections && !response.preference.anyServiceSelections" class="preferences-agreements-template-item">
+		<p><b>No service selections defined</b></p>
+	</div>
+</div>
+
+<div ng-show="portfolio && !response">
+	<div class="preferences-agreements-template-section-header">SCHEDULE</div>
+	<div ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.PrePlan.value" class="preferences-agreements-template-item">
+		<p><b>Pre-Planning Funeral Only</b></p>
+	</div>
+	<div ng-show="portfolio.schedule.anyScheduleSelections" class="preferences-agreements-template-item">
+		<table class="table table-condensed table-bordered table-striped">
+			<thead>
+				<tr>
+					<th class="preferences-agreements-tr-heading-description">Description</th>
+					<th class="preferences-agreements-tr-heading-selection">Selection</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.Scheduled.value">
+					<td>Date of Wake</td>
+					<td>{{ (portfolio.schedule.wakeDate | date : date : format) || "Not specified" }} </td>
+				</tr>
+				<tr ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.Scheduled.value">
+					<td style="min-width: 160px;">Date of Funeral</td>
+					<td>{{ (portfolio.schedule.ceremonyDate | date : date : format) || "Not specified" }} </td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+	<div ng-show="portfolio.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.None.value" class="preferences-agreements-template-item">
+		<p><b>No schedule preference selected</b></p>
+	</div>
+</div>
+<div ng-show="response">
+	<div class="preferences-agreements-template-section-header">SCHEDULE</div>
+	<div ng-show="response.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.PrePlan.value" class="preferences-agreements-template-item">
+		<p><b>Pre-Planning Funeral Only</b></p>
+	</div>
+	<div ng-show="response.schedule.anyScheduleSelections" class="preferences-agreements-template-item">
+		<table class="table table-condensed table-bordered table-striped">
+			<thead>
+				<tr>
+					<th class="preferences-agreements-tr-heading-description">Description</th>
+					<th class="preferences-agreements-tr-heading-selection">Selection</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr ng-show="response.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.Scheduled.value">
+					<td>Date of Wake</td>
+					<td>{{ (response.schedule.wakeDate | date : date : format) || "Not specified" }} </td>
+				</tr>
+				<tr ng-show="response.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.Scheduled.value">
+					<td style="min-width: 160px;">Date of Funeral</td>
+					<td>{{ (response.schedule.ceremonyDate | date : date : format) || "Not specified" }} </td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+	<div ng-show="response.schedule.scheduleChoiceType === enum.scheduleChoiceTypes.None.value" class="preferences-agreements-template-item">
+		<p><b>No schedule preference selected</b></p>
+	</div>
+</div>
+
+<div>
+	<div class="preferences-agreements-template-section-header">SERVICE SELECTIONS</div>
+	<table class="table table-bordered table-striped preferences-agreements-template-item" ng-show="portfolio.preference.anyServiceSelections || response.preference.anyServiceSelections">
+		<thead>
+			<tr>
+				<th class="preferences-agreements-tr-heading-description">Description</th>
+				<th class="preferences-agreements-tr-heading-selection">Selection</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr tr-request-view-preference description="Internment" key="internmentType" enum-key="internmentTypes"></tr>
+
+			<tr tr-request-view-preference description="Funeral Style" key="funeralType" enum-key="funeralTypes"></tr>
+
+			<tr tr-request-view-preference description="Wake Style" key="wakeType" enum-key="wakeTypes"></tr>
+
+			<tr tr-request-view-preference description="Religion" key="religionType" enum-key="religionTypes"></tr>
+
+			<tr tr-request-view-preference description="Expected Attendance" key="expectedAttendanceType" enum-key="expectedAttendanceTypes"></tr>
+
+			<tr ng-show="portfolio && portfolio.preference.servicePreferences">
+				<td>Service Preferences</td>
+				<td>{{ portfolio.preference.servicePreferences }} </td>
+			</tr>
+			<tr ng-show="request && request.preference.servicePreferences">
+				<td>Service Preferences</td>
+				<td>{{ request.preference.servicePreferences }} </td>
+			</tr>
+
+		</tbody>
+	</table>
+	<div ng-show="!portfolio.preference.anyServiceSelections && !response.preference.anyServiceSelections" class="preferences-agreements-template-item">
+		<p><b>No service selections defined</b></p>
+	</div>
+</div>
+
+
+<div>
+	<div class="preferences-agreements-template-section-header">CASKET SELECTIONS</div>
+	<table class="table table-bordered table-striped preferences-agreements-template-item" ng-show="portfolio.preference.anyCasketSelections || response.preference.anyCasketSelections">
+		<thead>
+			<tr>
+				<th class="preferences-agreements-tr-heading-description">Description</th>
+				<th class="preferences-agreements-tr-heading-selection">Selection</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr tr-request-view-preference description="Casket Material" key="casketMaterialType" enum-key="casketMaterialTypes"></tr>
+
+			<tr tr-request-view-preference description="Casket Size" key="casketSizeType" enum-key="casketSizeTypes"></tr>
+
+			<tr tr-request-view-preference description="Casket Color" key="casketColorType" enum-key="casketColorTypes"></tr>
+
+			<tr tr-request-view-preference description="Casket Manufacturer" key="casketManufacturerType" enum-key="casketManufacturerTypes"></tr>
+
+			<tr tr-request-view-preference description="Burial Container" key="burialContainerType" enum-key="burialContainerTypes"></tr>
+
+		</tbody>
+	</table>
+	<div ng-show="!portfolio.preference.anyCasketSelections && !response.preference.anyCasketSelections" class="preferences-agreements-template-item">
+		<p><b>No casket selections defined</b></p>
+	</div>
+</div>
+
+
+<div>
+	<div class="preferences-agreements-template-section-header">TRANSPORTATION SELECTIONS</div>
+	<table class="table table-bordered table-striped preferences-agreements-template-item" ng-show="portfolio.preference.anyTransportationSelections || response.preference.anyTransportationSelections">
+		<thead>
+			<tr>
+				<th class="preferences-agreements-tr-heading-description">Description</th>
+				<th class="preferences-agreements-tr-heading-selection">Selection</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr tr-request-view-preference description="Family Transportation" key="transportationOfFamilyType" enum-key="transportationOfFamilyTypes"></tr>
+
+		</tbody>
+	</table>
+	<div ng-show="!portfolio.preference.anyTransportationSelections && !response.preference.anyTransportationSelections" class="preferences-agreements-template-item">
+		<p><b>No transportation selections defined</b></p>
+	</div>
+</div>
+
+
+<div>
+	<div class="preferences-agreements-template-section-header">FLORAL SELECTIONS</div>
+	<table class="table table-bordered table-striped preferences-agreements-template-item" ng-show="portfolio.preference.anyFlowerSelections || response.preference.anyFlowerSelections">
+		<thead>
+			<tr>
+				<th class="preferences-agreements-tr-heading-description">Description</th>
+				<th class="preferences-agreements-tr-heading-selection">Selection</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr tr-request-view-preference description="Primary Flower" key="primaryFlowerType" enum-key="flowerTypes"></tr>
+
+			<tr tr-request-view-preference description="Secondary Flower" key="secondaryFlowerType" enum-key="flowerTypes"></tr>
+
+			<tr tr-request-view-preference description="Accent Flower" key="accentFlowerType" enum-key="flowerTypes"></tr>
+
+			<tr tr-request-view-preference description="Flower Spray" key="flowerSprayType" enum-key="flowerSprayTypes"></tr>
+
+		</tbody>
+	</table>
+	<div ng-show="!portfolio.preference.anyFlowerSelections && !response.preference.anyFlowerSelections" class="preferences-agreements-template-item">
+		<p><b>No flower selections defined</b></p>
+	</div>
+</div>
+

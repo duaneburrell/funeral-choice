@@ -1,0 +1,45 @@
+﻿
+<div class="title">
+	<div class="col-md-9 col-md-offset-1">
+		<div class="alert alert-accepted notification accepted-color">
+			<h4>You have <span><b>ACCEPTED</b></span> this quote recieved for {{ portfolio.principal.fullName }} </h4>
+			<div class="clear"></div>
+
+			<ul style="font-size: 13px;">
+				<li class="arrow2"><span>Distance: </span><span>{{ response.distance }} miles from {{ portfolio.preference.proximity.city }}, {{ portfolio.preference.proximity.state }}</span></li>
+				<li class="arrow2"><span>Bid Entered: </span><span time-ago="{{ response.pending.on }}"></span></li>
+				<li class="arrow2"><span>Quoted Price: </span><span>{{ response.quote | currency:"$" }}</span></li>
+				<li class="arrow2"><span>Deposit Paid: </span><span>{{ response.depositPaid | currency:"$" }}</span></li>
+				<li class="arrow2"><span>Balance Due: </span><span>{{ response.balanceDue | currency:"$" }}</span></li>
+				<li class="arrow2"><span>Accepted On: </span><span>{{ (response.current.on | date : date : format) || "Not specified" }}</span></li>
+			</ul>
+
+			<br />
+			<strong>{{ response.principal.name }}</strong>
+			<ul style="font-size: 13px;">
+				<li class="arrow2"><span>Address: </span><span>{{ response.principal.address.line1 }} {{ response.principal.address.city }}, {{ response.principal.address.state }} {{ response.principal.address.zip }}</span> <span style="margin-left:20px;"><a href="{{response.principal.googleMapUrl }}" target="_blank">map</a></span></li>
+				<li class="arrow2"><span>Phone: </span><span>{{ response.principal.phone }}</span></li>
+				<li class="arrow2"><span>Email: </span><span><a href="mailto:{{ response.principal.email }}">{{ response.principal.email }}</a></span></li>
+				<li class="arrow2" ng-show="response.profile.website"><span>Website: </span><span><a ng-href="{{ response.profile.website }}" target="_blank">{{ response.profile.website }}</a></span></li>
+			</ul>
+
+			<br />
+			<p style="font-size: 13px;">{{ response.profile.description }}</p>
+		</div>
+	</div>
+</div>
+<div class="clearfix" />
+
+
+<div class="row">
+	<div class="col-md-9 col-md-offset-1">
+		<div ng-include="'/App/Templates/Shared/response-view-agreements.html'" />
+	</div>
+</div>
+
+<div class="row">
+	<a class="btn btn-tales-one col-md-9 col-md-offset-1" href="#/">Dashboard</a>
+</div>
+
+<div class="clearfix" />
+<br />

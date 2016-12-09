@@ -1,0 +1,39 @@
+﻿
+<div class="title">
+	<div class="col-md-9 col-md-offset-1">
+		<div class="alert alert-rejected notification rejected-color">
+			<h4>You have <span><b>REJECTED</b></span> this quote recieved for {{ portfolio.principal.fullName }} </h4>
+			<div class="clear"></div>
+
+			<ul style="font-size: 13px;">
+				<li class="arrow2"><span>Distance: </span><span>{{ response.distance }} miles from {{ portfolio.preference.proximity.city }}, {{ portfolio.preference.proximity.state }}</span></li>
+				<li class="arrow2"><span>Bid Entered: </span><span time-ago="{{ response.pending.on }}"></span></li>
+				<li class="arrow2"><span>Quoted Price: </span><span>{{ response.quote | currency:"$" }}</span></li>
+				<li class="arrow2"><span>Deposit Required: </span><span>{{ response.depositDue | currency:"$" }}</span></li>
+				<li class="arrow2"><span>Request Date: </span><span>{{ (response.pending.on  | date : date : format)}}</span></li>
+				<li class="arrow2"><span>Bid Date: </span><span>{{ (response.pending.on | date : date : format) || "Not specified" }}</span></li>
+				<li class="arrow2"><span>Rejection Date: </span><span>{{ (response.current.on | date : date : format) || "Not specified" }}</span></li>
+				<li class="arrow2"><span>Funeral Business Established: </span><span business-established="{{ response.profile.businessEstablished }}"></span></li>
+				<li class="arrow2"><span>Funeral Business Age: </span><span facility-age="{{ response.profile.facilityAge }}"></span></li>
+				<li class="arrow2"><span>Funeral Business Style: </span><span facility-style="{{ response.profile.facilityStyle }}"></span></li>
+				<li class="arrow2"><span>Funeral Director Experience: </span><span funeral-director-experience="{{ response.profile.funeralDirectorExperience }}"></span></li>
+				<li class="arrow2"><span>Transportation Fleet Age: </span><span transportation-fleet-age="{{ response.profile.transportationFleetAge }}"></span></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="clearfix" />
+
+
+<div class="row">
+	<div class="col-md-9 col-md-offset-1">
+		<div ng-include="'/App/Templates/Shared/response-view-agreements.html'" />
+	</div>
+</div>
+
+<div class="row">
+	<a class="btn btn-tales-one col-md-9 col-md-offset-1" href="#/quotes/{{response.consumerPortfolioId}}">Back to Quotes</a>
+</div>
+
+<div class="clearfix" />
+<br />

@@ -1,0 +1,84 @@
+﻿
+<div class="widewrapper main">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 blog-main">
+				<article class="row blog-post">
+					<header>
+						<h2>Create an account for your business</h2>
+						<h3>Let us help you find families who need your services</h3>
+
+					</header>
+					<div class="body col-md-8 col-md-offset-1">
+						<div class="row">
+							<span>Email </span><span class="validation-error pull-right" invalid-property property="member.email"></span>
+							<input class="form-control input-lg" ng-model="registrationForm.member.email">
+						</div>
+
+						<div class="row">
+							<span>First Name </span><span class="validation-error pull-right" invalid-property property="member.firstName"></span>
+							<input class="form-control input-lg" ng-model="registrationForm.member.firstName">
+						</div>
+
+						<div class="row">
+							<span>Last Name </span><span class="validation-error pull-right" invalid-property property="member.lastName"></span>
+							<input class="form-control input-lg" ng-model="registrationForm.member.lastName">
+						</div>
+
+						<div class="row">
+							<span>Password </span><span class="validation-error pull-right" invalid-property property="password"></span>
+							<input type="password" class="form-control input-lg" ng-model="registrationForm.password">
+						</div>
+
+						<div class="row">
+							<span>Confirm Password </span><span class="validation-error pull-right" invalid-property property="confirmPassword"></span>
+							<input type="password" class="form-control input-lg" ng-model="registrationForm.confirmPassword">
+						</div>
+
+						<br />
+						<div class="row">
+							<span>(Password must be at least 6 characters long)</span>
+						</div>
+
+						<div class="row">
+							<span class="validation-error pull-right" invalid-property property="hasAcceptedEULA"></span>
+						</div>
+						<div class="row">
+							<input type="checkbox" class="input-md" ng-model="registrationForm.hasAcceptedEULA"><span>I have read and understand the <a href="#/eula" target="_blank">terms and conditions</a></span>
+						</div>
+
+						<br />
+						<div class="clearfix">
+
+
+							<span>Already have an </span><a href="#/login">account?</a>
+
+							<a class="btn btn-tales-one pull-right" ng-click="onSubmit()">Get Started</a>
+						</div>
+					</div>
+				</article>
+
+			</div>
+
+			<aside class="col-md-4 blog-aside">
+
+				<select class="form-control" ng-model="profiler.key" ng-options="i for i in profiler.keys" ng-change="profiler.onKeyChanged()" ng-show="profiler.isVisible"></select>
+
+				<div class="aside-widget">
+					<header>
+						<h3>Why Use Funeral-Choice?</h3>
+					</header>
+					<div class="body">
+						<ul class="tales-list">
+							<li><span>Traditional marketing is in decline.</span></li>
+							<li><span>Funeral-Choice will spend more on marketing than any individual or group of funeral homes in the country.</span></li>
+							<li><span>We are expert new media marketers.</span></li>
+							<li><span>Reduce lost opportunities .</span></li>
+							<li><span>And best of all, its free!.</span></li>
+						</ul>
+					</div>
+				</div>
+			</aside>
+		</div>
+	</div>
+</div>

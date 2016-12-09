@@ -1,0 +1,83 @@
+﻿
+
+@height-logo-mobile: 45px;
+@height-logo-tablet: 45px;
+@height-logo-desktop: 85px;
+
+@min-height-subheader-mobile: 5px;
+@min-height-subheader-tablet: 20px;
+@font-size-copyright-mobile: .65em;
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (max-width : 480px) {
+    .fc-logo {
+        height: @height-logo-mobile;
+    }
+
+    .fc-video {
+        width:480px;
+        height:270px;
+    }
+
+    .fc-intro-message {
+        color: white;
+        height:300px;
+    }
+
+    .intro-text-main, .intro-text-sub {
+        font-size: .95em;
+    }
+
+    /* tales themes overrides */
+    .widewrapper.subheader {
+        min-height: @min-height-subheader-mobile;
+    }
+
+    .widewrapper.copyright {
+        font-size: @font-size-copyright-mobile;
+    }
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 481px) and (max-width : 1024px) {
+    .fc-logo {
+        height:@height-logo-tablet;
+    }
+
+    .fc-video {
+        width:560px;
+        height:315px;
+        height:220px;
+    }
+
+    .fc-intro-message {
+        color: white;
+    }
+
+    /* tales themes overrides */
+    .widewrapper.subheader {
+        min-height: @min-height-subheader-tablet;
+    }
+
+    .widewrapper.copyright {
+        font-size:@font-size-copyright-mobile;
+    }
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1024px) {
+    .fc-logo {
+        height: @height-logo-desktop;
+    }
+
+    .fc-video {
+        width:560px;
+        height:315px;
+    }
+
+    .fc-intro-message {
+        color: white;
+        height:300px;
+    }
+}

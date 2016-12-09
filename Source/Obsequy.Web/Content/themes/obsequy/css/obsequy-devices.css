@@ -1,0 +1,65 @@
+/* Smartphones (portrait and landscape) ----------- */
+
+@media only screen and (max-width: 480px) {
+  .fc-logo {
+    height: 45px;
+  }
+  .fc-video {
+    width: 480px;
+    height: 270px;
+  }
+  .fc-intro-message {
+    color: white;
+    height: 300px;
+  }
+  .intro-text-main,
+  .intro-text-sub {
+    font-size: .95em;
+  }
+  /* tales themes overrides */
+  
+  .widewrapper.subheader {
+    min-height: 5px;
+  }
+  .widewrapper.copyright {
+    font-size: 0.65em;
+  }
+}
+/* iPads (portrait and landscape) ----------- */
+
+@media only screen and (min-width: 481px) and (max-width: 1024px) {
+  .fc-logo {
+    height: 45px;
+  }
+  .fc-video {
+    width: 560px;
+    height: 315px;
+    height: 220px;
+  }
+  .fc-intro-message {
+    color: white;
+  }
+  /* tales themes overrides */
+  
+  .widewrapper.subheader {
+    min-height: 20px;
+  }
+  .widewrapper.copyright {
+    font-size: 0.65em;
+  }
+}
+/* Desktops and laptops ----------- */
+
+@media only screen and (min-width: 1024px) {
+  .fc-logo {
+    height: 85px;
+  }
+  .fc-video {
+    width: 560px;
+    height: 315px;
+  }
+  .fc-intro-message {
+    color: white;
+    height: 300px;
+  }
+}
