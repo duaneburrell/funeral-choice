@@ -1,2 +1,2 @@
 # funeral-choice
-Provides funeral arrangements bidding services.
+Provides funeral arrangement bidding services.
