@@ -2,7 +2,7 @@
 {
     var config_data = {
         'GENERAL_CONFIG': {
-            'SHOW_TEST_DATA': 'true',
+            'SHOW_TEST_DATA': 'false',
         }
     }
     angular.forEach(config_data, function (key, value) {
